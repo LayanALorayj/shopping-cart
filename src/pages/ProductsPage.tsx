@@ -15,16 +15,16 @@ const ProductsPage: React.FC = () => {
   if (error) return <p className="error">{error}</p>;
 
   return (
-    <div className="products-container">
-      {products.map((p) => (
-        <ProductCard
-          key={p.id}
-          name={p.title}
-          price={p.price}
-          image={p.thumbnail}
-        />
-      ))}
-    </div>
+   <div className="products-container custom-grid-layout">
+  {products.map((p) => (
+    <ProductCard
+      key={p.id}
+      name={p.title}
+      price={p.price}
+      image={p.thumbnail}
+    />
+  ))}
+</div>
   );
 };
 

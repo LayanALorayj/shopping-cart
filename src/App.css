@@ -135,18 +135,16 @@ input:focus {
   margin: 0 auto;
   padding: 20px;
 }
-/* تنسيق العنوان Your Cart */
 .cart-container h2 {
-  text-align: center;        /* يخلي النص في الوسط */
-  font-size: 36px;           /* حجم كبير */
+  text-align: center;       
+  font-size: 36px;           
   margin-top: 30px;
   color: #333;
 }
 
-/* تنسيق رسالة "Your cart is empty 🛒" */
 .cart-container p {
-  text-align: center;        /* يخلي النص في الوسط */
-  font-size: 28px;           /* حجم كبير */
+  text-align: center;        
+  font-size: 28px;           
   color: #888;
   margin-top: 50px;
 }
@@ -166,4 +164,37 @@ input:focus {
 .back-home-button:hover {
   background-color:  #cda0b280;
 }
+/* ✅ سلة المشتريات - توزيع بسيط بدون تخصيص */
+.cart-products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+@media (min-width: 1024px) {
+  .custom-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .custom-grid-layout .product-card:nth-child(1) {
+    grid-column: 1 / span 1;
+  }
+
+  .custom-grid-layout .product-card:nth-child(2) {
+    grid-column: 2 / span 2;
+    transform: scale(1.05);
+    z-index: 1;
+  }
+
+  .custom-grid-layout .product-card:nth-child(3) {
+    grid-column: 4 / span 1;
+  }
+}
+
 
