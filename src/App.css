@@ -93,11 +93,12 @@ header div {
 
 .products-container {
   display: grid;
+  justify-content: center;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1.5rem;
   padding: 2.5rem;
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .loading,
@@ -128,5 +129,41 @@ input:focus {
     padding: 1rem;
     gap: 1rem;
   }
+}
+.cart-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+/* تنسيق العنوان Your Cart */
+.cart-container h2 {
+  text-align: center;        /* يخلي النص في الوسط */
+  font-size: 36px;           /* حجم كبير */
+  margin-top: 30px;
+  color: #333;
+}
+
+/* تنسيق رسالة "Your cart is empty 🛒" */
+.cart-container p {
+  text-align: center;        /* يخلي النص في الوسط */
+  font-size: 28px;           /* حجم كبير */
+  color: #888;
+  margin-top: 50px;
+}
+.back-home-button {
+  display: block;
+  margin: 40px auto 20px auto; 
+  padding: 12px 24px;
+  background-color: #a35275;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-home-button:hover {
+  background-color:  #cda0b280;
 }
 
