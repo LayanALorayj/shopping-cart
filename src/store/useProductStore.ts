@@ -37,9 +37,20 @@ export const useProductStore = create<ProductStore>((set, get) => ({
       const res = await fetch("https://dummyjson.com/products/category-list");
       const data: string[] = await res.json();
 
-      const categories: Category[] = data.map((slug) => ({
+      const girlCategories = [
+        "beauty",
+        "womens-dresses",
+        "womens-shoes",
+        "womens-watches",
+        "womens-bags",
+        "womens-jewellery",
+      ];
+
+      const filtered = data.filter((slug) => girlCategories.includes(slug));
+
+      const categories: Category[] = filtered.map((slug) => ({
         slug,
-        name: slug.charAt(0).toUpperCase() + slug.slice(1),
+        name: slug.charAt(0).toUpperCase() + slug.slice(1).replace("-", " "),
       }));
 
       set({ categories, loading: false });

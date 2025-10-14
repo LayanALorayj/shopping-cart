@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { DownOutlined, ClockCircleTwoTone } from "@ant-design/icons";
-import { Dropdown, Space } from "antd";
-import type { MenuProps } from "antd";
+import { ClockCircleTwoTone } from "@ant-design/icons";
+import { Button, Space } from "antd";
 import { useProductStore } from "../store/useProductStore";
 import ProductCard from "../components/ProductCard";
 import "../App.css";
@@ -33,17 +32,8 @@ const ProductsPage: React.FC = () => {
     fetchProducts(categorySlug);
   }, [category, fetchCategories, fetchProducts, setSelectedCategory]);
 
-  const menuItems: MenuProps["items"] = useMemo(() => {
-    return [
-      ...categories.map((cat) => ({
-        key: cat.slug,
-        label: cat.name,
-      })),
-    ];
-  }, [categories]);
-
-  const handleMenuClick: MenuProps["onClick"] = (e) => {
-    const newCategory = e.key === "all" ? "" : e.key;
+  const handleCategoryClick = (slug: string) => {
+    const newCategory = slug === "all" ? "" : slug;
     navigate(`/products/${newCategory}`);
   };
 
@@ -75,40 +65,22 @@ const ProductsPage: React.FC = () => {
 
   return (
     <div className="products-page" style={{ padding: "20px" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "20px",
-        }}
-      >
-        <h1 className="hp-title">{currentCategoryName}</h1>
+      <div className="category-section">
+        <h1 className="hp-title category-title">{currentCategoryName}</h1>
 
-        <Dropdown
-          menu={{
-            items: menuItems,
-            onClick: handleMenuClick,
-            selectedKeys: [selectedCategory],
-          }}
-          placement="bottomRight"
-          trigger={["click"]}
-        >
-          <a onClick={(e) => e.preventDefault()}>
-            <Space
-              style={{
-                border: "1px solid #713131ff",
-                padding: "5px 10px",
-                borderRadius: "5px",
-                background: "#f0d8e2ff",
-                cursor: "pointer",
-              }}
+        <Space className="category-buttons" wrap>
+          {categories.map((cat) => (
+            <Button
+              key={cat.slug}
+              className={`category-btn ${
+                selectedCategory === cat.slug ? "active" : ""
+              }`}
+              onClick={() => handleCategoryClick(cat.slug)}
             >
-              {currentCategoryName}
-              <DownOutlined />
-            </Space>
-          </a>
-        </Dropdown>
+              {cat.name}
+            </Button>
+          ))}
+        </Space>
       </div>
 
       <div

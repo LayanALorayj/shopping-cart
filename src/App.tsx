@@ -4,6 +4,7 @@ import Header from "./components/layout/Header";
 import ProductsPage from "./pages/ProductsPage";
 import CartPage from "./pages/CartPage";
 import HomePage from "./pages/HomePage";
+import ContactUs from "./pages/ContactPage";
 import "./App.css";
 
 const App: React.FC = () => {
@@ -13,7 +14,8 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />      
         <Route path="/products/:category" element={<ProductsPage />} /> 
-        <Route path="/cart" element={<CartPage />} />  
+        <Route path="/cart" element={<CartPage />} /> 
+         <Route path="/contact" element={<ContactUs />} />  
       </Routes>
     </Router>
   );
