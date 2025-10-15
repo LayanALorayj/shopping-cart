@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ClockCircleTwoTone } from "@ant-design/icons";
 import { Button, Space } from "antd";
@@ -14,23 +14,21 @@ const ProductsPage: React.FC = () => {
     categories,
     products,
     selectedCategory,
-    loading,
-    error,
-    fetchCategories,
-    fetchProducts,
+    loadCategories,
+    loadProducts,
     setSelectedCategory,
   } = useProductStore();
 
-  useEffect(() => {
+  const loadData = useCallback(async () => {
     const categorySlug = category || "all";
-
-    if (categories.length === 0) {
-      fetchCategories();
-    }
-
+    await loadCategories();
     setSelectedCategory(categorySlug);
-    fetchProducts(categorySlug);
-  }, [category, fetchCategories, fetchProducts, setSelectedCategory]);
+    loadProducts(categorySlug);
+  }, [category, loadCategories, loadProducts, setSelectedCategory]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const handleCategoryClick = (slug: string) => {
     const newCategory = slug === "all" ? "" : slug;
@@ -39,26 +37,26 @@ const ProductsPage: React.FC = () => {
 
   const currentCategoryName = useMemo(() => {
     if (selectedCategory === "all") return "All Products";
-    const cat = categories.find((c) => c.slug === selectedCategory);
+    const cat = categories.data.find((c) => c.slug === selectedCategory);
     return cat ? cat.name : selectedCategory;
-  }, [selectedCategory, categories]);
+  }, [selectedCategory, categories.data]);
 
-  if (loading) {
+  if (categories.loading || products.loading) {
     return (
       <p style={{ textAlign: "center", marginTop: "50px" }}>
         <ClockCircleTwoTone
           twoToneColor="#bc6789"
           style={{ fontSize: "36px", marginRight: "10px" }}
         />
-        Loading products...
+        {categories.loading ? "Loading categories..." : "Loading products..."}
       </p>
     );
   }
 
-  if (error) {
+  if (categories.error || products.error) {
     return (
       <p style={{ color: "red", textAlign: "center", marginTop: "50px" }}>
-        Error: {error}
+        Error: {categories.error || products.error}
       </p>
     );
   }
@@ -69,7 +67,7 @@ const ProductsPage: React.FC = () => {
         <h1 className="hp-title category-title">{currentCategoryName}</h1>
 
         <Space className="category-buttons" wrap>
-          {categories.map((cat) => (
+          {categories.data.map((cat) => (
             <Button
               key={cat.slug}
               className={`category-btn ${
@@ -91,8 +89,8 @@ const ProductsPage: React.FC = () => {
           gap: "20px",
         }}
       >
-        {products.length > 0 ? (
-          products.map((product) => (
+        {products.data.length > 0 ? (
+          products.data.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))
         ) : (

@@ -1,25 +1,52 @@
-import React, { useEffect } from "react";
+import React, { useLayoutEffect, useCallback } from "react";
 import { useProductStore } from "../store/useProductStore";
 import { useNavigate } from "react-router-dom";
 import "../App.css"; 
 
 const HomePage: React.FC = () => {
-  const { categories, loading, error, fetchCategories } = useProductStore();
+  const { 
+    categories, 
+    loadCategories,
+    testCounter,
+    incrementTest
+  } = useProductStore();
+  
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchCategories();
-  }, [fetchCategories]);
+  const initializeCategories = useCallback(() => {
+    loadCategories();
+  }, [loadCategories]);
 
-  if (loading) return <div className="hp-loading">Loading...</div>;
-  if (error) return <div className="hp-error">Error: {error}</div>;
+  useLayoutEffect(() => {
+    initializeCategories();
+  }, [initializeCategories]);
+
+  if (categories.loading) return <div className="hp-loading">Loading...</div>;
+  if (categories.error) return <div className="hp-error">Error: {categories.error}</div>;
 
   return (
     <div className="home-page">
       <h1 className="hp-title">Categories</h1>
+      
+      {/* DevTools Test Button */}
+      <div style={{ marginBottom: '20px', textAlign: 'center' }}>
+        <button 
+          onClick={incrementTest}
+          style={{ 
+            padding: '10px 20px', 
+            backgroundColor: '#007bff', 
+            color: 'white', 
+            border: 'none', 
+            borderRadius: '5px',
+            cursor: 'pointer'
+          }}
+        >
+          Test DevTools (Counter: {testCounter})
+        </button>
+      </div>
 
       <div className="category-grid">
-        {categories.map((cat) => (
+        {categories.data.map((cat) => (
           <div
             key={cat.slug}
             onClick={() => navigate(`/products/${cat.slug}`)}
