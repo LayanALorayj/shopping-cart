@@ -1,64 +1,52 @@
 import React from "react";
-import { Layout } from 'antd'; 
+import { Layout, Badge } from "antd";
 import { Link } from "react-router-dom";
-import { ShoppingOutlined, ShoppingCartOutlined } from "@ant-design/icons"; 
-import { useCart } from "../../context/CartContext";
+import { ShoppingCartOutlined, HomeFilled, FileTextFilled } from "@ant-design/icons"; 
+import useCartStore from "../../context/useCartStore";
+import logo from "../../assets/logoL.png";
 
-const { Header: AntHeader } = Layout; 
-
-const customAntHeaderStyle: React.CSSProperties = {
-  background: 'linear-gradient(90deg, #cda0b2, #bc6789)', 
-  color: 'white',
-  height: 64, 
-  padding: '1rem 2.5rem',
-  display: 'flex',
-  justifyContent: 'space-between', 
-  alignItems: 'center',
-  lineHeight: 'normal', 
-  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.15)',
-  position: 'sticky',
-  top: 0,
-  zIndex: 10,
-};
-
-const shopTitleStyles: React.CSSProperties = {
-  fontSize: '1.6rem',
-  letterSpacing: '1px',
-  fontWeight: 600,
-  margin: 0, 
-  display: 'flex',
-  alignItems: 'center',
-};
-
-const cartIconContainerStyles: React.CSSProperties = {
-  fontSize: '1.2rem',
-  background: 'rgba(255, 255, 255, 0.2)', 
-  padding: '6px 14px',
-  borderRadius: '20px',
-  fontWeight: 500,
-  display: 'flex',
-  alignItems: 'center',
-  gap: '5px',
-  color: 'white',
-  cursor: 'pointer', 
-  textDecoration: 'none' 
-};
+const { Header: AntHeader } = Layout;
 
 const Header: React.FC = () => {
-  const { state } = useCart();
+  const count = useCartStore((state) => state.count);
 
   return (
-    <AntHeader style={customAntHeaderStyle}>
-      <h2 style={shopTitleStyles}>
-        <ShoppingOutlined style={{ marginRight: "8px" }} />
-        Shop
-      </h2>
+    <AntHeader className="custom-header">
+      <div className="header-left">
+        <Link to="/" className="logo-link">
+          <img src={logo} alt="Shop Logo" className="logo-image" />
+          <span className="shop-name">Layan Shop</span>
+        </Link>
 
-      <Link to="/cart" style={{ textDecoration: "none" }}>
-        <div style={cartIconContainerStyles}>
-          <ShoppingCartOutlined />
-          <span>{state.count}</span>
-        </div>
+        <nav className="nav-links">
+          <Link to="/" className="nav-item">
+            <HomeFilled className="nav-icon" /> Home
+          </Link>
+          </nav>
+          <nav className="nav-links">
+          <Link to="/contact" className="nav-item">
+            <FileTextFilled className="nav-icon" /> Contact Us
+          </Link>
+        </nav>
+      </div>
+
+      <Link to="/cart" className="cart-link">
+        <Badge
+          count={count}
+          size="default"
+          style={{
+            backgroundColor: "#ff69b4",
+            boxShadow: "0 0 6px rgba(255, 105, 180, 0.6)",
+            fontSize: "13px",
+            minWidth: "22px",
+            height: "22px",
+            lineHeight: "22px",
+          }}
+        >
+          <div className="cart-icon-container">
+            <ShoppingCartOutlined />
+          </div>
+        </Badge>
       </Link>
     </AntHeader>
   );

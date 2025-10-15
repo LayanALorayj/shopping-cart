@@ -1,30 +1,25 @@
 import React from "react";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { useCart } from "../context/CartContext";
+import useCartStore from "../context/useCartStore";
+import type { Product } from "../store/useProductStore";
 import "../App.css";
 
-interface ProductProps {
-  name: string;
-  price: number;
-  image: string;
+interface ProductCardProps {
+  product: Product;
 }
 
-const ProductCard: React.FC<ProductProps> = ({ name, price, image }) => {
-  const { addToCart } = useCart();
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const { addItem } = useCartStore();
 
   const handleAddToCart = () => {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    const newItem = { name, price, image };
-    cartItems.push(newItem);
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    addToCart(); 
+    addItem(product);
   };
 
   return (
     <div className="product-card">
-      <img src={image} alt={name} />
-      <h3>{name}</h3>
-      <p>{price} $</p>
+      <img src={product.thumbnail} alt={product.title} />
+      <h3>{product.title}</h3>
+      <p>{product.price} $</p>
       <button onClick={handleAddToCart}>
         <ShoppingCartOutlined /> Add to cart
       </button>

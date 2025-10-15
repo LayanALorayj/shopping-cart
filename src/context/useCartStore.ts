@@ -1,6 +1,12 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import type { Product } from "../store/useProductStore";
+
+export type Product = {
+  id: number;
+  title: string;
+  price: number;
+  thumbnail: string;
+};
 
 type State = {
   count: number;
@@ -10,7 +16,6 @@ type State = {
 type Actions = {
   addItem: (product: Product) => void;
   removeItem: (id: number) => void;
-  clearCart: () => void;
   loadCartFromStorage: () => void;
 };
 
@@ -38,20 +43,12 @@ const useCartStore = create<State & Actions>()(
       });
     },
 
-    clearCart: () => {
-      set((state) => {
-        state.cartList = [];
-        state.count = 0;
-        localStorage.removeItem("cartItems");
-      });
-    },
-
     loadCartFromStorage: () => {
       const stored = JSON.parse(localStorage.getItem("cartItems") || "[]");
-      set((state) => {
-        state.cartList = stored;
-        state.count = stored.length;
-      });
+      set(() => ({
+        cartList: stored,
+        count: stored.length,
+      }));
     },
   }))
 );
