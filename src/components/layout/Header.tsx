@@ -1,7 +1,7 @@
-import React from "react";
-import { Layout, Badge } from "antd";
+import React, { useState } from "react";
+import { Layout, Badge, Button } from "antd";
 import { Link } from "react-router-dom";
-import { ShoppingCartOutlined, HomeFilled, FileTextFilled } from "@ant-design/icons"; 
+import {ShoppingCartOutlined, HomeFilled, FileTextFilled,MenuOutlined,} from "@ant-design/icons";
 import useCartStore from "../../context/useCartStore";
 import logo from "../../assets/logoL.png";
 
@@ -9,6 +9,9 @@ const { Header: AntHeader } = Layout;
 
 const Header: React.FC = () => {
   const count = useCartStore((state) => state.count);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
     <AntHeader className="custom-header">
@@ -18,16 +21,23 @@ const Header: React.FC = () => {
           <span className="shop-name">Layan Shop</span>
         </Link>
 
-        <nav className="nav-links">
+        <nav className="nav-links nav-desktop">
           <Link to="/" className="nav-item">
             <HomeFilled className="nav-icon" /> Home
           </Link>
           </nav>
-          <nav className="nav-links">
+           <nav className="nav-links nav-desktop">
           <Link to="/contact" className="nav-item">
             <FileTextFilled className="nav-icon" /> Contact Us
           </Link>
-        </nav>
+          </nav>
+
+        <Button
+          type="text"
+          icon={<MenuOutlined />}
+          onClick={toggleMenu}
+          className="menu-button"
+        />
       </div>
 
       <Link to="/cart" className="cart-link">
@@ -48,6 +58,17 @@ const Header: React.FC = () => {
           </div>
         </Badge>
       </Link>
+
+      {menuOpen && (
+        <div className="dropdown-menu">
+          <Link to="/" className="dropdown-item" onClick={() => setMenuOpen(false)}>
+            <HomeFilled className="nav-icon" /> Home
+          </Link>
+          <Link to="/contact" className="dropdown-item" onClick={() => setMenuOpen(false)}>
+            <FileTextFilled className="nav-icon" /> Contact Us
+          </Link>
+        </div>
+      )}
     </AntHeader>
   );
 };

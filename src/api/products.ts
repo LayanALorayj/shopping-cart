@@ -1,8 +1,4 @@
-// export async function getProducts() {
-//   const res = await fetch("https://dummyjson.com/products");
-//   if (!res.ok) {
-//     throw new Error(" Error");
-//   }
-//   const data = await res.json();
-//   return data.products;
-// }
+export const fetchProduct = async (id: number) => {
+  const response = await fetch(`https://dummyjson.com/products/${id}`);
+  return response.json();
+};

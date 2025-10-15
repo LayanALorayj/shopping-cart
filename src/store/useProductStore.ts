@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { subscribeWithSelector, devtools } from "zustand/middleware";
+import { fetchProduct } from "../api/products"; 
 
 export interface Product {
   id: number;
@@ -55,6 +56,7 @@ interface AsyncState<T> {
 interface ProductStore {
   categories: AsyncState<Category[]>;
   products: AsyncState<Product[]>;
+  currentProduct: AsyncState<Product | null>; 
   selectedCategory: string;
   categoriesFetched: boolean;
   testCounter: number;
@@ -62,6 +64,7 @@ interface ProductStore {
   // Actions
   loadCategories: () => Promise<void>;
   loadProducts: (category: string) => Promise<void>;
+  loadProduct: (id: number) => Promise<void>; 
   setSelectedCategory: (category: string) => void;
   resetError: () => void;
   incrementTest: () => void;
@@ -81,6 +84,7 @@ export const useProductStore = create<ProductStore>()(
     subscribeWithSelector((set, get) => ({
       categories: createAsyncState<Category[]>([]),
       products: createAsyncState<Product[]>([]),
+      currentProduct: createAsyncState<Product | null>(null), 
       selectedCategory: "",
       categoriesFetched: false,
       testCounter: 0,
@@ -191,6 +195,47 @@ export const useProductStore = create<ProductStore>()(
         return request;
       },
 
+      loadProduct: async (id) => {
+        const requestKey = `product-${id}`;
+        
+        // Check if request is already pending
+
+        if (pendingRequests.has(requestKey)) {
+          return pendingRequests.get(requestKey);
+        }
+
+        const request = (async () => {
+          set((state) => ({
+            currentProduct: { ...state.currentProduct, loading: true, error: null },
+          }), false, 'product/loadStart');
+
+          try {
+            const data = await fetchProduct(id); 
+            
+            set(() => ({
+              currentProduct: {
+                data,
+                loading: false,
+                error: null,
+              }
+            }), false, 'product/loadSuccess');
+          } catch (error) {
+            set((state) => ({
+              currentProduct: {
+                ...state.currentProduct,
+                loading: false,
+                error: "Failed to load product",
+              }
+            }), false, 'product/loadError');
+          } finally {
+            pendingRequests.delete(requestKey);
+          }
+        })();
+
+        pendingRequests.set(requestKey, request);
+        return request;
+      },
+
       setSelectedCategory: (category: string) => {
         set({ selectedCategory: category }, false, 'category/select');
       },
@@ -199,6 +244,7 @@ export const useProductStore = create<ProductStore>()(
         set((state) => ({
           categories: { ...state.categories, error: null },
           products: { ...state.products, error: null },
+          currentProduct: { ...state.currentProduct, error: null },
         }), false, 'error/reset');
       },
 
