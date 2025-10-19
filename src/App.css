@@ -387,7 +387,7 @@ h1 {
 }
 
 .logo-image {
-  height: 60px;
+  height: 50px;
   width: auto;
   cursor: pointer;
   background-color: white;
@@ -679,4 +679,3 @@ h1 {
     gap: 1rem;
   }
 }
-

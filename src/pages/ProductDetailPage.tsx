@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { ClockCircleTwoTone } from "@ant-design/icons";
-import { useProductStore } from "../store/useProductStore";
+import { useProduct } from "../api/products";
 import ProductHeader from "../components/product/ProductHeader";
 import ProductImages from "../components/product/ProductImages";
 import ProductTabs from "../components/product/ProductTabs";
@@ -9,15 +9,9 @@ import "../components/product/ProductDetailPage.css";
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { currentProduct, loadProduct } = useProductStore();
+  const { product, loading, error } = useProduct(id);
 
-  useEffect(() => {
-    if (id) {
-      loadProduct(Number(id));
-    }
-  }, [id, loadProduct]);
-
-  if (currentProduct.loading) {
+  if (loading)
     return (
       <p style={{ textAlign: "center", marginTop: "50px" }}>
         <ClockCircleTwoTone
@@ -27,21 +21,15 @@ const ProductDetailPage: React.FC = () => {
         Loading product...
       </p>
     );
-  }
 
-  if (currentProduct.error) {
+  if (error)
     return (
       <p style={{ color: "red", textAlign: "center", marginTop: "50px" }}>
-        {currentProduct.error}
+        {error}
       </p>
     );
-  }
 
-  if (!currentProduct.data) {
-    return null;
-  }
-
-  const product = currentProduct.data;
+  if (!product) return null;
 
   return (
     <div className="product-detail-page">
