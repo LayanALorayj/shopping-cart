@@ -8,6 +8,8 @@ const ProductsPage = lazy(() => import("./pages/ProductsPage"));
 const ProductDetailPage = lazy(() => import("./pages/ProductDetailPage"));
 const CartPage = lazy(() => import("./pages/CartPage"));
 const ContactUs = lazy(() => import("./pages/ContactPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 
 const App: React.FC = () => {
   return (
@@ -26,6 +28,8 @@ const App: React.FC = () => {
           <Route path="/product/:id" element={<ProductDetailPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </Suspense>
     </Router>

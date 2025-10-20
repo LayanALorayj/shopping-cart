@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { Layout, Badge, Button } from "antd";
 import { Link } from "react-router-dom";
-import {ShoppingCartOutlined, HomeFilled, FileTextFilled,MenuOutlined,} from "@ant-design/icons";
+import {
+  ShoppingCartOutlined,
+  HomeFilled,
+  FileTextFilled,
+  MenuOutlined,
+  UserOutlined
+} from "@ant-design/icons";
 import useCartStore from "../../context/useCartStore";
 import logo from "../../assets/logoL.png";
 
@@ -20,17 +26,44 @@ const Header: React.FC = () => {
           <img src={logo} alt="Shop Logo" className="logo-image" />
           <span className="shop-name">Layan Shop</span>
         </Link>
+      </div>
 
-        <nav className="nav-links nav-desktop">
-          <Link to="/" className="nav-item">
-            <HomeFilled className="nav-icon" /> Home
-          </Link>
-          </nav>
-           <nav className="nav-links nav-desktop">
-          <Link to="/contact" className="nav-item">
-            <FileTextFilled className="nav-icon" /> Contact Us
-          </Link>
-          </nav>
+        <nav className="nav-center nav-desktop">
+      <div className="nav-circle">
+        <Link to="/" className="nav-item">
+          <HomeFilled className="nav-icon" /> Home
+        </Link>
+      </div>
+      <div className="nav-circle">
+        <Link to="/contact" className="nav-item">
+          <FileTextFilled className="nav-icon" /> Contact Us
+        </Link>
+      </div>
+    </nav>
+
+
+      <div className="header-right">
+        <Link to="/cart" className="cart-link cart-desktop">
+          <Badge
+            count={count}
+            size="default"
+            style={{
+              backgroundColor: "#ff69b4",
+              boxShadow: "0 0 6px rgba(255, 105, 180, 0.6)",
+              fontSize: "13px",
+              minWidth: "22px",
+              height: "22px",
+              lineHeight: "22px",
+            }}
+          >
+            <div className="cart-icon-container">
+              <ShoppingCartOutlined />
+            </div>
+          </Badge>
+        </Link>
+         <Link to="/login" className="profile-link">
+          <UserOutlined className="profile-icon" />
+        </Link>
 
         <Button
           type="text"
@@ -40,25 +73,6 @@ const Header: React.FC = () => {
         />
       </div>
 
-      <Link to="/cart" className="cart-link">
-        <Badge
-          count={count}
-          size="default"
-          style={{
-            backgroundColor: "#ff69b4",
-            boxShadow: "0 0 6px rgba(255, 105, 180, 0.6)",
-            fontSize: "13px",
-            minWidth: "22px",
-            height: "22px",
-            lineHeight: "22px",
-          }}
-        >
-          <div className="cart-icon-container">
-            <ShoppingCartOutlined />
-          </div>
-        </Badge>
-      </Link>
-
       {menuOpen && (
         <div className="dropdown-menu">
           <Link to="/" className="dropdown-item" onClick={() => setMenuOpen(false)}>
@@ -66,6 +80,12 @@ const Header: React.FC = () => {
           </Link>
           <Link to="/contact" className="dropdown-item" onClick={() => setMenuOpen(false)}>
             <FileTextFilled className="nav-icon" /> Contact Us
+          </Link>
+          <Link to="/cart" className="dropdown-item" onClick={() => setMenuOpen(false)}>
+            <ShoppingCartOutlined className="nav-icon" /> Cart ({count})
+          </Link>
+          <Link to="/login" className="dropdown-item" onClick={() => setMenuOpen(false)}>
+            <UserOutlined className="nav-icon" /> Login
           </Link>
         </div>
       )}
