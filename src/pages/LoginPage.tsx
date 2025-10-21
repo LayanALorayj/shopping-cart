@@ -1,7 +1,9 @@
 import React from "react";
 import type { FormProps } from "antd";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../api/User";
+import { useAuthStore } from "../store/useAuthStore";
 import "../App.css";
 
 type FieldType = {
@@ -12,14 +14,23 @@ type FieldType = {
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const { setToken } = useAuthStore();
 
-  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values);
-    navigate("/profile"); 
-  };
+  const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
+    try {
+      const data = await loginUser(values.username!, values.password!);
+      console.log("login success");
 
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+      setToken(data.accessToken, data);
+
+      console.log("Token saved to store");
+      message.success("Logged in successfully!");
+      navigate("/profile");
+
+    } catch (error) {
+      console.error("❌ Login error:", error);
+      message.error("Invalid username or password");
+    }
   };
 
   return (
@@ -31,7 +42,6 @@ const Login: React.FC = () => {
           layout="vertical"
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item<FieldType>
@@ -58,7 +68,7 @@ const Login: React.FC = () => {
           </div>
 
           <Form.Item style={{ marginTop: "20px" }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" block>
               Login
             </Button>
           </Form.Item>

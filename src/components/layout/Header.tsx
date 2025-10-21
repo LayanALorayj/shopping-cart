@@ -6,15 +6,17 @@ import {
   HomeFilled,
   FileTextFilled,
   MenuOutlined,
-  UserOutlined
+  UserOutlined,
 } from "@ant-design/icons";
 import useCartStore from "../../context/useCartStore";
+import { useAuthStore } from "../../store/useAuthStore";
 import logo from "../../assets/logoL.png";
 
 const { Header: AntHeader } = Layout;
 
 const Header: React.FC = () => {
   const count = useCartStore((state) => state.count);
+  const { token } = useAuthStore();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -28,19 +30,18 @@ const Header: React.FC = () => {
         </Link>
       </div>
 
-        <nav className="nav-center nav-desktop">
-      <div className="nav-circle">
-        <Link to="/" className="nav-item">
-          <HomeFilled className="nav-icon" /> Home
-        </Link>
-      </div>
-      <div className="nav-circle">
-        <Link to="/contact" className="nav-item">
-          <FileTextFilled className="nav-icon" /> Contact Us
-        </Link>
-      </div>
-    </nav>
-
+      <nav className="nav-center nav-desktop">
+        <div className="nav-circle">
+          <Link to="/" className="nav-item">
+            <HomeFilled className="nav-icon" /> Home
+          </Link>
+        </div>
+        <div className="nav-circle">
+          <Link to="/contact" className="nav-item">
+            <FileTextFilled className="nav-icon" /> Contact Us
+          </Link>
+        </div>
+      </nav>
 
       <div className="header-right">
         <Link to="/cart" className="cart-link cart-desktop">
@@ -61,7 +62,8 @@ const Header: React.FC = () => {
             </div>
           </Badge>
         </Link>
-         <Link to="/login" className="profile-link">
+
+        <Link to={token ? "/profile" : "/login"} className="profile-link">
           <UserOutlined className="profile-icon" />
         </Link>
 
@@ -84,8 +86,13 @@ const Header: React.FC = () => {
           <Link to="/cart" className="dropdown-item" onClick={() => setMenuOpen(false)}>
             <ShoppingCartOutlined className="nav-icon" /> Cart ({count})
           </Link>
-          <Link to="/login" className="dropdown-item" onClick={() => setMenuOpen(false)}>
-            <UserOutlined className="nav-icon" /> Login
+
+          <Link
+            to={token ? "/profile" : "/login"}
+            className="dropdown-item"
+            onClick={() => setMenuOpen(false)}
+          >
+            <UserOutlined className="nav-icon" /> {token ? "Profile" : "Login"}
           </Link>
         </div>
       )}

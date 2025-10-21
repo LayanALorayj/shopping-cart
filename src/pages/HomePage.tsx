@@ -7,8 +7,6 @@ const HomePage: React.FC = () => {
   const { 
     categories, 
     loadCategories,
-    testCounter,
-    incrementTest
   } = useProductStore();
   
   const navigate = useNavigate();
@@ -27,24 +25,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="home-page">
       <h1 className="hp-title">Categories</h1>
-      
-      {/* DevTools Test Button */}
-      <div style={{ marginBottom: '20px', textAlign: 'center' }}>
-        <button 
-          onClick={incrementTest}
-          style={{ 
-            padding: '10px 20px', 
-            backgroundColor: '#007bff', 
-            color: 'white', 
-            border: 'none', 
-            borderRadius: '5px',
-            cursor: 'pointer'
-          }}
-        >
-          Test DevTools (Counter: {testCounter})
-        </button>
-      </div>
-
+  
       <div className="category-grid">
         {categories.data.map((cat) => (
           <div
