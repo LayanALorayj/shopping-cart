@@ -22,6 +22,33 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
+
+      //todo: hnadle refresh token logic here
+      const {refreshToken} = useAuthStore.getState();
+
+      fetch('https://dummyjson.com/auth/refresh', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          refreshToken: refreshToken, 
+          expiresInMins: 30,  
+        }),
+      })
+      .then(res => res.json())
+      .then(data => {
+        const { accessToken, refreshToken } = data;
+        useAuthStore.getState().setRefreshToken(accessToken, refreshToken);
+
+        console.log("Token refreshed successfully");
+      })
+      .catch(() => {
+        const { clearToken } = useAuthStore.getState();
+        clearToken();
+        message.error("Session expired. Please log in again.");
+        console.warn("Refresh token failed — cleared from store");
+      });
+
+    } else {  
       const { clearToken } = useAuthStore.getState();
       clearToken();
       message.error("Please log in again.");

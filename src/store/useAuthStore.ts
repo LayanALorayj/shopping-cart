@@ -1,34 +1,59 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface UserData {
+type UserData ={
   id: number;
   username: string;
   email: string;
-  firstName?: string;
-  lastName?: string;
-  image?: string;
-  gender?: string;
-}
+  firstName: string;
+  lastName: string;
+  image: string;
+  gender: string;}
 
-interface AuthState {
-  token: string | null;
-  user: UserData | null;
+  type loginInfo = {
+    accessToken: string;
+    refreshToken: string;
+  }& UserData;
+
+
+type AuthState ={
+  accessToken: string;
+  refreshToken: string;
+  user: UserData ;
   _hasHydrated: boolean;
   setToken: (token: string, user: UserData) => void;
+  setUser: (user: UserData) => void;
+  setRefreshToken: (token:string ,refreshToken: string) => void;
   clearToken: () => void;
   setHydrated: (value: boolean) => void;
+  setLoginInfo: (data:loginInfo) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
-      token: null,
-      user: null,
+      token: undefined,
+      user: {} as UserData,
+      setLoginInfo: (data) => set({
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+        user: {
+          id: data.id,
+          username: data.username,
+          email: data.email,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          image: data.image,  
+        }), 
       _hasHydrated: false,
-      setToken: (token, user) => set({ token, user }),
-      clearToken: () => set({ token: null, user: null }),
+      setUser: (user) => set({ user }),
+      setToken: ( user) => set({  user }),
+      clearToken: () => set({ token: undefined, user: {} as UserData }),
       setHydrated: (value) => set({ _hasHydrated: value }),
+      setRefreshToken: (token, refreshToken) => set((state) => ({
+        token,
+        user: { ...state.user, refreshToken },
+      })),
     }),
     {
       name: "auth-storage",

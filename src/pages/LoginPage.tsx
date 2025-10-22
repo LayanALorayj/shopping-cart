@@ -14,14 +14,14 @@ type FieldType = {
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { setToken } = useAuthStore();
+  const { setLoginInfo } = useAuthStore();
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     try {
       const data = await loginUser(values.username!, values.password!);
       console.log("login success");
 
-      setToken(data.accessToken, data);
+      setLoginInfo(data);
 
       console.log("Token saved to store");
       message.success("Logged in successfully!");

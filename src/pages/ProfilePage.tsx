@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Card, Avatar, Typography, Button, Divider, message, Spin } from "antd";
 import { UserOutlined, MailOutlined } from "@ant-design/icons";
@@ -10,41 +11,43 @@ const { Title, Text } = Typography;
 
 const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
-  const { token, user, setToken, clearToken, _hasHydrated } = useAuthStore();
+
+  //todo: fix types accessToken and refreshToken
+  const { accessToken, user , clearToken, _hasHydrated } = useAuthStore();
   const [loading, setLoading] = useState(false);
 
+  const {refreshToken} = useAuthStore.getState();
+  console.log("Refresh Token:", refreshToken);
+
   useEffect(() => {
-    if (_hasHydrated && !token) {
+    if (_hasHydrated && !accessToken) {
       message.warning("Please log in first");
       navigate("/login");
     }
-  }, [token, _hasHydrated, navigate]);
+  }, [accessToken, _hasHydrated, navigate]);
 
   useEffect(() => {
     const fetchProfile = async () => {
-      if (!token) return;
+      if (!accessToken) return;
       try {
         setLoading(true);
         const profileData = await getProfile();
-        setToken(token, profileData); 
+
+        //TODO: replace setUser 
+        // setToken(accessToken, profileData); 
       } catch (error: any) {
         console.error("Profile fetch error:", error);
-        
-        if (error.response?.status === 401) {
-          message.error("Session expired. Please log in again.");
-          clearToken();
-          navigate("/login");
-        }
+
       } finally {
         setLoading(false);
       }
     };
 
     fetchProfile();
-  }, [token]);
+  }, [accessToken]);
 
   if (!_hasHydrated) return <Spin size="large" style={{ marginTop: 100 }} />;
-  if (!token) return null;
+  if (!accessToken) return null;
   if (loading) return <Spin size="large" style={{ marginTop: 100 }} />;
 
   return (
