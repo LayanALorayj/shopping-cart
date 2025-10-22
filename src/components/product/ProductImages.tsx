@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "./ProductDetailPage.module.css";
 
 interface ProductImagesProps {
   images: string[];
@@ -8,15 +9,17 @@ const ProductImages: React.FC<ProductImagesProps> = ({ images }) => {
   const [mainImage, setMainImage] = useState(images[0]);
 
   return (
-    <div className="product-images">
-      <img src={mainImage} alt="Main" className="main-image" />
-      <div className="thumbnail-list">
+    <div className={styles.imagesContainer}>
+      <div className={styles.mainImageContainer}>
+        <img src={mainImage} alt="Main" className={styles.mainImage} />
+      </div>
+      <div className={styles.thumbnailList}>
         {images.map((img, i) => (
           <img
             key={i}
             src={img}
             alt={`Thumbnail ${i}`}
-            className={`thumbnail ${img === mainImage ? "active" : ""}`}
+            className={`${styles.thumbnail} ${img === mainImage ? styles.thumbnailActive : ""}`}
             onClick={() => setMainImage(img)}
           />
         ))}

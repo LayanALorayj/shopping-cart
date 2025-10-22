@@ -1,11 +1,12 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { ClockCircleTwoTone } from "@ant-design/icons";
-import { useProduct } from "../api/products";
+// import { useProduct } from "../api/products";
 import ProductHeader from "../components/product/ProductHeader";
 import ProductImages from "../components/product/ProductImages";
 import ProductTabs from "../components/product/ProductTabs";
-import "../components/product/ProductDetailPage.css";
+import styles from "../components/product/ProductDetailPage.module.css";
+import useProduct from "../hooks/useProduct";
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -13,29 +14,35 @@ const ProductDetailPage: React.FC = () => {
 
   if (loading)
     return (
-      <p style={{ textAlign: "center", marginTop: "50px" }}>
+      <div className={styles.loading}>
         <ClockCircleTwoTone
-          twoToneColor="#bc6789"
+          twoToneColor="#1890ff"
           style={{ fontSize: "36px", marginRight: "10px" }}
         />
         Loading product...
-      </p>
+      </div>
     );
 
   if (error)
     return (
-      <p style={{ color: "red", textAlign: "center", marginTop: "50px" }}>
+      <div className={styles.error}>
         {error}
-      </p>
+      </div>
     );
 
   if (!product) return null;
 
   return (
-    <div className="product-detail-page">
-      <ProductHeader product={product} />
-      <div className="product-detail-body">
-        <ProductImages images={product.images} />
+    <div className={styles.container}>
+      <div className={styles.mainLayout}>
+        <div className={styles.imagesSection}>
+          <ProductImages images={product.images} />
+        </div>
+        <div className={styles.infoSection}>
+          <ProductHeader product={product} />
+        </div>
+      </div>
+      <div className={styles.detailBody}>
         <ProductTabs product={product} />
       </div>
     </div>

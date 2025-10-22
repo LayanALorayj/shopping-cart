@@ -2,8 +2,8 @@ import React, { useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ClockCircleTwoTone } from "@ant-design/icons";
 import { Button, Space } from "antd";
-import { useProducts } from "../api/products";
-import ProductCard from "../components/ProductCard";
+import { useProducts } from "../hooks/useProducts";
+import ProductCard from "../components/product/ProductCard";
 import "../App.css";
 
 const ProductsPage: React.FC = () => {
@@ -63,8 +63,11 @@ const ProductsPage: React.FC = () => {
         className="products-container custom-grid-layout"
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-          gap: "20px",
+          gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+          gap: "28px",
+          padding: "24px 0",
+          maxWidth: "1400px",
+          margin: "0 auto",
         }}
       >
         {products.length > 0 ? (

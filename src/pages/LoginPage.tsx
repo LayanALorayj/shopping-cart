@@ -2,8 +2,8 @@ import React from "react";
 import type { FormProps } from "antd";
 import { Button, Checkbox, Form, Input, message } from "antd";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../api/User";
-import { useAuthStore } from "../store/useAuthStore";
+import { userService } from "../services";
+import useAuthStore from "../hooks/useAuthStore";
 import "../App.css";
 
 type FieldType = {
@@ -14,14 +14,20 @@ type FieldType = {
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { setLoginInfo } = useAuthStore();
+  const { login } = useAuthStore();
 
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     try {
-      const data = await loginUser(values.username!, values.password!);
+      const data = await userService.login({
+        username: values.username!,
+        password: values.password!,
+      });
       console.log("login success");
 
-      setLoginInfo(data);
+      login(data, {
+        accessToken: data.token,
+        refreshToken: data.token,
+      });
 
       console.log("Token saved to store");
       message.success("Logged in successfully!");

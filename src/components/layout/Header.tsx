@@ -8,14 +8,16 @@ import {
   MenuOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import useCartStore from "../../context/useCartStore";
-import { useAuthStore } from "../../store/useAuthStore";
+// import useCartStore from "../../store/useCartStore";
+import useAuthStore from "../../hooks/useAuthStore";
+import useCartStore from "../../hooks/useCartStore";
 import logo from "../../assets/logoL.png";
 
 const { Header: AntHeader } = Layout;
 
 const Header: React.FC = () => {
-  const count = useCartStore((state) => state.count);
+  const cartList = useCartStore((state) => state.cartList);
+  const count = cartList.reduce((total, item) => total + item.quantity, 0);
   const { accessToken } = useAuthStore();
   const [menuOpen, setMenuOpen] = useState(false);
 
