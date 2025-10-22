@@ -3,7 +3,6 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   min-height: 100vh;
 }
 
@@ -119,7 +118,7 @@
   display: block;
   margin: 40px auto 20px auto;
   padding: 14px 28px;
-  background: linear-gradient(135deg, #1890ff, #40a9ff);
+  background: linear-gradient(135deg,  #bc6789, #f1d7ec);
   color: white;
   font-size: 16px;
   font-weight: 600;
@@ -127,13 +126,13 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(254, 122, 182, 0.3);
 }
 
 .continueButton:hover {
-  background: linear-gradient(135deg, #40a9ff, #69c0ff);
+  background: linear-gradient(135deg,  #94506b, #dbb6d3);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(24, 144, 255, 0.4);
+  box-shadow: 0 6px 16px rgba(254, 122, 182, 0.3);
 }
 
 .continueButton:active {

@@ -75,14 +75,14 @@
 .thumbnail:hover {
   opacity: 1;
   transform: scale(1.1);
-  border-color: #1890ff;
-  box-shadow: 0 4px 16px rgba(24, 144, 255, 0.3);
+  border-color: #bc6789;
+  box-shadow: 0 4px 16px rgba(254, 122, 182, 0.3);
 }
 
 .thumbnailActive {
   opacity: 1;
-  border-color: #1890ff;
-  box-shadow: 0 4px 16px rgba(24, 144, 255, 0.3);
+  border-color: #bc6789;
+  box-shadow: 0 4px 16px rgba(254, 122, 182, 0.3);
 }
 
 /* Product Info Section */
@@ -103,16 +103,16 @@
 
 .brand {
   font-size: 12px;
-  color: #1890ff;
+  color: #4f2143dc;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.2px;
-  background: linear-gradient(135deg, rgba(24, 144, 255, 0.1), rgba(24, 144, 255, 0.05));
+  background: linear-gradient(135deg, rgba(254, 122, 182, 0.3), rgba(24, 144, 255, 0.05));
   padding: 6px 12px;
   border-radius: 8px;
   display: inline-block;
   width: fit-content;
-  border: 1px solid rgba(24, 144, 255, 0.2);
+  border: 1px solid rgba(83, 15, 69, 0.2);
 }
 
 .title {
@@ -202,9 +202,9 @@
   border-radius: 12px;
   font-weight: 700;
   font-size: 16px;
-  background: linear-gradient(135deg, #1890ff, #40a9ff);
+  background: linear-gradient(135deg,#bc6789, #f1d7ec);
   border: none;
-  box-shadow: 0 4px 16px rgba(24, 144, 255, 0.3);
+  box-shadow: 0 4px 16px rgba(254, 122, 182, 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
@@ -214,8 +214,8 @@
 }
 
 .addToCartBtn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #40a9ff, #69c0ff);
-  box-shadow: 0 6px 20px rgba(24, 144, 255, 0.4);
+  background: linear-gradient(135deg, #bc6789, #f1d7ec);
+  box-shadow: 0 6px 20px rgba(254, 122, 182, 0.3);
   transform: translateY(-2px);
 }
 
@@ -245,8 +245,8 @@
 }
 
 .quickActionBtn:hover {
-  border-color: #1890ff;
-  color: #1890ff;
+  border-color: #bc6789;
+  color: #bc6789;
   background: rgba(24, 144, 255, 0.05);
   transform: translateY(-1px);
 }
@@ -277,7 +277,7 @@
 }
 
 .tag {
-  background: linear-gradient(135deg, #1890ff, #40a9ff);
+  background: linear-gradient(135deg,#bc6789, #f1d7ec);
   color: white;
   padding: 4px 10px;
   border-radius: 16px;

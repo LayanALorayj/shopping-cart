@@ -3,14 +3,14 @@
   max-width: 800px;
   margin: 0 auto;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: #f5f7fa ;
   box-sizing: border-box;
 }
 
 .profileCard {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(312deg, #f5f7fa 0%, #b7486f42 100%);
   box-sizing: border-box;
 }
 
@@ -26,7 +26,7 @@
 .profileAvatar {
   border: 4px solid #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  background: #1890ff;
+  background: #f7f8f9f3;
 }
 
 .infoContainer {
