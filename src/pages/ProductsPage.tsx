@@ -1,34 +1,15 @@
-import React, { useEffect, useMemo, useCallback } from "react";
+import React, { useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ClockCircleTwoTone } from "@ant-design/icons";
 import { Button, Space } from "antd";
-import { useProductStore } from "../store/useProductStore";
-import ProductCard from "../components/ProductCard";
+import { useProducts } from "../hooks/useProducts";
+import ProductCard from "../components/product/ProductCard";
 import "../App.css";
 
 const ProductsPage: React.FC = () => {
   const { category } = useParams<{ category: string }>();
   const navigate = useNavigate();
-
-  const {
-    categories,
-    products,
-    selectedCategory,
-    loadCategories,
-    loadProducts,
-    setSelectedCategory,
-  } = useProductStore();
-
-  const loadData = useCallback(async () => {
-    const categorySlug = category || "all";
-    await loadCategories();
-    setSelectedCategory(categorySlug);
-    loadProducts(categorySlug);
-  }, [category, loadCategories, loadProducts, setSelectedCategory]);
-
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
+  const { categories, products, loading, error } = useProducts(category);
 
   const handleCategoryClick = (slug: string) => {
     const newCategory = slug === "all" ? "" : slug;
@@ -36,42 +17,39 @@ const ProductsPage: React.FC = () => {
   };
 
   const currentCategoryName = useMemo(() => {
-    if (selectedCategory === "all") return "All Products";
-    const cat = categories.data.find((c) => c.slug === selectedCategory);
-    return cat ? cat.name : selectedCategory;
-  }, [selectedCategory, categories.data]);
+    if (!category || category === "all") return "All Products";
+    const cat = categories.find((c) => c.slug === category);
+    return cat ? cat.name : category;
+  }, [category, categories]);
 
-  if (categories.loading || products.loading) {
+  if (loading)
     return (
       <p style={{ textAlign: "center", marginTop: "50px" }}>
         <ClockCircleTwoTone
           twoToneColor="#bc6789"
           style={{ fontSize: "36px", marginRight: "10px" }}
         />
-        {categories.loading ? "Loading categories..." : "Loading products..."}
+        Loading...
       </p>
     );
-  }
 
-  if (categories.error || products.error) {
+  if (error)
     return (
       <p style={{ color: "red", textAlign: "center", marginTop: "50px" }}>
-        Error: {categories.error || products.error}
+        {error}
       </p>
     );
-  }
 
   return (
     <div className="products-page" style={{ padding: "20px" }}>
       <div className="category-section">
         <h1 className="hp-title category-title">{currentCategoryName}</h1>
-
         <Space className="category-buttons" wrap>
-          {categories.data.map((cat) => (
+          {categories.map((cat) => (
             <Button
               key={cat.slug}
               className={`category-btn ${
-                selectedCategory === cat.slug ? "active" : ""
+                category === cat.slug ? "active" : ""
               }`}
               onClick={() => handleCategoryClick(cat.slug)}
             >
@@ -85,12 +63,15 @@ const ProductsPage: React.FC = () => {
         className="products-container custom-grid-layout"
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-          gap: "20px",
+          gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+          gap: "28px",
+          padding: "24px 0",
+          maxWidth: "1400px",
+          margin: "0 auto",
         }}
       >
-        {products.data.length > 0 ? (
-          products.data.map((product) => (
+        {products.length > 0 ? (
+          products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))
         ) : (

@@ -1,0 +1,132 @@
+.profilePage {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  box-sizing: border-box;
+}
+
+.profileCard {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  box-sizing: border-box;
+}
+
+.headerRow {
+  margin-bottom: 24px;
+}
+
+.avatarContainer {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.profileAvatar {
+  border: 4px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #1890ff;
+}
+
+.infoContainer {
+  text-align: left;
+}
+
+.profileTitle {
+  margin: 0 !important;
+  color: #1f1f1f !important;
+  font-weight: bold !important;
+}
+
+.username {
+  font-size: 16px !important;
+  display: block !important;
+  margin-bottom: 8px !important;
+}
+
+.basicInfo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px !important;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+}
+
+.sectionDivider {
+  margin: 24px 0 !important;
+  border-color: #e8e8e8 !important;
+}
+
+.sectionTitle {
+  color: #1f1f1f !important;
+  margin-bottom: 16px !important;
+}
+
+.descriptions {
+  background: #fff !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.descriptions .ant-descriptions-item-label {
+  font-weight: bold !important;
+  color: #1f1f1f !important;
+  background: #fafafa !important;
+}
+
+.descriptions .ant-descriptions-item-content {
+  color: #262626 !important;
+}
+
+.icon {
+  margin-right: 8px !important;
+  color: #1890ff !important;
+}
+
+.logoutContainer {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.logoutButton {
+  border-radius: 8px !important;
+  padding: 0 32px !important;
+  font-size: 16px !important;
+}
+
+.loadingSpinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .profilePage {
+    padding: 10px;
+  }
+
+  .profileCard {
+    padding: 20px;
+  }
+
+  .profileAvatar {
+    width: 100px !important;
+    height: 100px !important;
+    font-size: 40px !important;
+  }
+
+  .profileTitle {
+    font-size: 24px !important;
+  }
+
+  .descriptions {
+    font-size: 14px !important;
+  }
+}

@@ -74,14 +74,14 @@ Use the existing cart context to add products to cart when user clicks "Add to C
 - The product data structure is already updated in the store
 
 ## Simple Checklist
-- [ ] Create `ProductDetailPage.tsx`
-- [ ] Add route for `/product/:id`
-- [ ] Update store to fetch single product
-- [ ] Create API function to get product by ID
-- [ ] Show product images
-- [ ] Show product info in tabs
-- [ ] Add "Add to Cart" button that works
-- [ ] Make it look good on mobile
+- [/] Create `ProductDetailPage.tsx`
+- [/] Add route for `/product/:id`
+- [/] Update store to fetch single product
+- [/] Create API function to get product by ID
+- [/] Show product images
+- [/] Show product info in tabs
+- [/] Add "Add to Cart" button that works
+- [/] Make it look good on mobile
 
 ## Need Help?
 - Check how other pages are built

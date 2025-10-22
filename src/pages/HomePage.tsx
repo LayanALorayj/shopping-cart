@@ -1,52 +1,21 @@
-import React, { useLayoutEffect, useCallback } from "react";
-import { useProductStore } from "../store/useProductStore";
+import React from "react";
+import { useProducts } from "../hooks/useProducts";
 import { useNavigate } from "react-router-dom";
 import "../App.css"; 
 
 const HomePage: React.FC = () => {
-  const { 
-    categories, 
-    loadCategories,
-    testCounter,
-    incrementTest
-  } = useProductStore();
-  
+  const { categories, loading, error } = useProducts();
   const navigate = useNavigate();
 
-  const initializeCategories = useCallback(() => {
-    loadCategories();
-  }, [loadCategories]);
-
-  useLayoutEffect(() => {
-    initializeCategories();
-  }, [initializeCategories]);
-
-  if (categories.loading) return <div className="hp-loading">Loading...</div>;
-  if (categories.error) return <div className="hp-error">Error: {categories.error}</div>;
+  if (loading) return <div className="hp-loading">Loading...</div>;
+  if (error) return <div className="hp-error">Error: {error}</div>;
 
   return (
     <div className="home-page">
       <h1 className="hp-title">Categories</h1>
-      
-      {/* DevTools Test Button */}
-      <div style={{ marginBottom: '20px', textAlign: 'center' }}>
-        <button 
-          onClick={incrementTest}
-          style={{ 
-            padding: '10px 20px', 
-            backgroundColor: '#007bff', 
-            color: 'white', 
-            border: 'none', 
-            borderRadius: '5px',
-            cursor: 'pointer'
-          }}
-        >
-          Test DevTools (Counter: {testCounter})
-        </button>
-      </div>
-
+  
       <div className="category-grid">
-        {categories.data.map((cat) => (
+        {categories.map((cat) => (
           <div
             key={cat.slug}
             onClick={() => navigate(`/products/${cat.slug}`)}

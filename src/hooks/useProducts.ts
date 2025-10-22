@@ -1,29 +1,50 @@
-// import { useEffect, useState } from "react";
+import { useState, useEffect, useCallback } from 'react';
+import { productService } from '../services';
+import type { Product } from '../types/product';
 
-// interface Product {
-//   id: number;
-//   title: string;
-//   price: number;
-//   thumbnail: string;
-// }
+interface Category {
+  slug: string;
+  name: string;
+}
 
-// export function useProducts() {
-//   const [products, setProducts] = useState<Product[]>([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState<string | null>(null);
+export const useProducts = (category?: string) => {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-//   useEffect(() => {
-//     getProducts()
-//       .then((data) => {
-//         setProducts(data);
-//         setLoading(false);
-//       })
-//       .catch((err) => {
-//         console.error(err);
-//         setError(" Error");
-//         setLoading(false);
-//       });
-//   }, []);
+  const fetchCategories = useCallback(async () => {
+    try {
+      const data = await productService.getCategories();
+      setCategories(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load categories');
+    }
+  }, []);
 
-//   return { products, loading, error };
-// }
+  const fetchProducts = useCallback(async (cat: string) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const data = await productService.getProducts(cat);
+      setProducts(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load products');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
+
+  useEffect(() => {
+    const catSlug = category || 'all';
+    fetchProducts(catSlug);
+  }, [category, fetchProducts]);
+
+  return { categories, products, loading, error };
+};
+
+export default useProducts;
