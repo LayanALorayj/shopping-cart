@@ -10,7 +10,7 @@ const ProductDetailPage = lazy(() => import("./pages/ProductDetailPage"));
 const CartPage = lazy(() => import("./pages/CartPage"));
 const ContactUs = lazy(() => import("./pages/ContactPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
-const ProfilePage = lazy(() => import("./pages/ProfilePage"));
+const ProfilePage = lazy(() => import("./pages/Profile"));
 
 const App: React.FC = () => {
   return (

@@ -3,12 +3,73 @@ import { persist } from "zustand/middleware";
 
 type UserData = {
   id: number;
-  username: string;
-  email: string;
   firstName: string;
   lastName: string;
-  image: string;
+  maidenName: string;
+  age: number;
   gender: string;
+  email: string;
+  phone: string;
+  username: string;
+  password: string;
+  birthDate: string;
+  image: string;
+  bloodGroup: string;
+  height: number;
+  weight: number;
+  eyeColor: string;
+  hair: {
+    color: string;
+    type: string;
+  };
+  ip: string;
+  address: {
+    address: string;
+    city: string;
+    state: string;
+    stateCode: string;
+    postalCode: string;
+    coordinates: {
+      lat: number;
+      lng: number;
+    };
+    country: string;
+  };
+  macAddress: string;
+  university: string;
+  bank: {
+    cardExpire: string;
+    cardNumber: string;
+    cardType: string;
+    currency: string;
+    iban: string;
+  };
+  company: {
+    department: string;
+    name: string;
+    title: string;
+    address: {
+      address: string;
+      city: string;
+      state: string;
+      stateCode: string;
+      postalCode: string;
+      coordinates: {
+        lat: number;
+        lng: number;
+      };
+      country: string;
+    };
+  };
+  ein: string;
+  ssn: string;
+  userAgent: string;
+  crypto: {
+    coin: string;
+    wallet: string;
+    network: string;
+  };
+  role: string;
 };
 
 type LoginInfo = {
@@ -48,12 +109,33 @@ export const useAuthStore = create<AuthState>()(
           refreshToken: data.refreshToken,
           user: {
             id: data.id,
-            username: data.username,
-            email: data.email,
             firstName: data.firstName,
             lastName: data.lastName,
-            image: data.image,
+            maidenName: data.maidenName,
+            age: data.age,
             gender: data.gender,
+            email: data.email,
+            phone: data.phone,
+            username: data.username,
+            password: data.password,
+            birthDate: data.birthDate,
+            image: data.image,
+            bloodGroup: data.bloodGroup,
+            height: data.height,
+            weight: data.weight,
+            eyeColor: data.eyeColor,
+            hair: data.hair,
+            ip: data.ip,
+            address: data.address,
+            macAddress: data.macAddress,
+            university: data.university,
+            bank: data.bank,
+            company: data.company,
+            ein: data.ein,
+            ssn: data.ssn,
+            userAgent: data.userAgent,
+            crypto: data.crypto,
+            role: data.role,
           },
         }),
     }),
