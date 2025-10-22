@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, {useState } from 'react';
 import { Form, Input, Button, Typography, Space } from 'antd';
 import { UserOutlined, MailOutlined,} from '@ant-design/icons';
 import "../App.css";
@@ -25,7 +25,7 @@ const ControlledForm: React.FC = () => {
 
  return (
   <div className="form-wrapper controlled-form">
-   <Title level={2} className="form-title-custom">Controlled Form</Title>
+   <Title level={2} className="form-title-custom">Contact Form</Title>
    <Form layout="vertical" onFinish={handleSubmit} className="ant-form-custom">
     <Form.Item label="Name" required >
      <Input
@@ -64,50 +64,6 @@ const ControlledForm: React.FC = () => {
  );
 };
 
-const UncontrolledForm: React.FC = () => {
- const formRef = useRef<any>(null);
-
- const handleSubmit = () => {
-  if (formRef.current) {
-   const values = formRef.current.getFieldsValue();
-   console.log('Uncontrolled Form Data (using AntD Form Ref):', values);
-  }
- };
-
- return (
-  <div className="form-wrapper uncontrolled-form">
-   <Title level={2} className="form-title-custom">Uncontrolled Form</Title>
-   <Form
-    layout="vertical"
-    ref={formRef}
-    onFinish={handleSubmit}
-    className="ant-form-custom"
-   >
-    <Form.Item label="Name" name="uncontrolledName">
-     <Input placeholder="Enter your name" 
-     prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-     />
-     
-    </Form.Item>
-    <Form.Item label="Email" name="uncontrolledEmail" >
-     <Input placeholder="Enter your email" 
-     prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
-     />
-    </Form.Item>
-    <Form.Item label="comment" name="uncontrolledComment">
-     <Input.TextArea placeholder="Enter your comment" rows={4} />
-    </Form.Item>
-    <Form.Item>
-     <Button type="primary" htmlType="submit">
-      Submit Uncontrolled
-     </Button>
-    </Form.Item>
-   </Form>
-  </div>
- );
-};
-
-
 const ContactPage: React.FC = () => {
  return (
   <div className="contact-page-layout">
@@ -116,7 +72,6 @@ const ContactPage: React.FC = () => {
    </Title>
    <Space direction="vertical" size="large" style={{ display: 'flex' }}>
     <ControlledForm />
-    <UncontrolledForm />
    </Space>
   </div>
  );
