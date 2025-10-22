@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Rate } from "antd";
 import { useNavigate } from "react-router-dom";
-import useCartStore from "../../hooks/useCartStore";
+import { useCartStore } from "../../hooks";
 import styles from "./ProductDetailPage.module.css";
 
 interface ProductHeaderProps {
@@ -9,11 +9,10 @@ interface ProductHeaderProps {
 }
 
 const ProductHeader: React.FC<ProductHeaderProps> = ({ product }) => {
-  const addItem = useCartStore((state) => state.addItem);
+  const addItem = useCartStore((state: any) => state.addItem);
   const navigate = useNavigate();
-
   const handleAddToCart = () => {
-    addItem(product);
+    addItem({ id: product.id, product: product, quantity: 1 });
     navigate('/cart');
   };
 
