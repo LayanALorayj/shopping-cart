@@ -16,7 +16,7 @@ const ProductDetailPage: React.FC = () => {
     return (
       <div className={styles.loading}>
         <ClockCircleTwoTone
-          twoToneColor="#1890ff"
+          twoToneColor="#bc6789"
           style={{ fontSize: "36px", marginRight: "10px" }}
         />
         Loading product...

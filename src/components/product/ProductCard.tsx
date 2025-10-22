@@ -165,7 +165,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
             {/* Price */}
             <Space align="baseline" size="small">
-              <Text strong style={{ fontSize: '18px', color: '#1890ff' }}>
+              <Text strong style={{ fontSize: '18px', color: '#333' }}>
                 {formatPrice(discountPrice)}
               </Text>
               {product.discountPercentage > 0 && (

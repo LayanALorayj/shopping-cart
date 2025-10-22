@@ -20,7 +20,7 @@ const CartPage: React.FC = () => {
 
       {cartList.length === 0 ? (
         <div className={styles.emptyMessage}>
-          Your cart is empty <HeartTwoTone twoToneColor="#1890ff" /> !
+          Your cart is empty <HeartTwoTone twoToneColor="#bc6789" /> !
         </div>
       ) : (
         <>
