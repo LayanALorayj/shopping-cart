@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Card, Avatar, Typography, Button, Divider, message, Spin } from "antd";
 import { UserOutlined, MailOutlined } from "@ant-design/icons";
@@ -12,12 +11,8 @@ const { Title, Text } = Typography;
 const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
 
-  //todo: fix types accessToken and refreshToken
-  const { accessToken, user , clearToken, _hasHydrated } = useAuthStore();
+  const { accessToken, user, clearToken, _hasHydrated, setUserInfo } = useAuthStore();
   const [loading, setLoading] = useState(false);
-
-  const {refreshToken} = useAuthStore.getState();
-  console.log("Refresh Token:", refreshToken);
 
   useEffect(() => {
     if (_hasHydrated && !accessToken) {
@@ -32,19 +27,19 @@ const ProfilePage: React.FC = () => {
       try {
         setLoading(true);
         const profileData = await getProfile();
+         const { refreshToken } = useAuthStore.getState();
+          console.log("Refresh Token:", refreshToken);
 
-        //TODO: replace setUser 
-        // setToken(accessToken, profileData); 
+        setUserInfo(profileData);
       } catch (error: any) {
         console.error("Profile fetch error:", error);
-
       } finally {
         setLoading(false);
       }
     };
 
     fetchProfile();
-  }, [accessToken]);
+  }, [accessToken, setUserInfo]);
 
   if (!_hasHydrated) return <Spin size="large" style={{ marginTop: 100 }} />;
   if (!accessToken) return null;

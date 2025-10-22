@@ -16,7 +16,7 @@ const { Header: AntHeader } = Layout;
 
 const Header: React.FC = () => {
   const count = useCartStore((state) => state.count);
-  const { token } = useAuthStore();
+  const { accessToken } = useAuthStore();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -63,7 +63,7 @@ const Header: React.FC = () => {
           </Badge>
         </Link>
 
-        <Link to={token ? "/profile" : "/login"} className="profile-link">
+        <Link to={accessToken ? "/profile" : "/login"} className="profile-link">
           <UserOutlined className="profile-icon" />
         </Link>
 
@@ -88,11 +88,11 @@ const Header: React.FC = () => {
           </Link>
 
           <Link
-            to={token ? "/profile" : "/login"}
+            to={accessToken ? "/profile" : "/login"}
             className="dropdown-item"
             onClick={() => setMenuOpen(false)}
           >
-            <UserOutlined className="nav-icon" /> {token ? "Profile" : "Login"}
+            <UserOutlined className="nav-icon" /> {accessToken ? "Profile" : "Login"}
           </Link>
         </div>
       )}

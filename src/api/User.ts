@@ -9,7 +9,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const token = useAuthStore.getState().token;
+    const token = useAuthStore.getState().accessToken;
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -22,50 +22,41 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
+      const { refreshToken } = useAuthStore.getState();
 
-      //todo: hnadle refresh token logic here
-      const {refreshToken} = useAuthStore.getState();
-
-      fetch('https://dummyjson.com/auth/refresh', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      fetch("https://dummyjson.com/auth/refresh", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          refreshToken: refreshToken, 
-          expiresInMins: 30,  
+          refreshToken: refreshToken,
+          expiresInMins: 30,
         }),
       })
-      .then(res => res.json())
-      .then(data => {
-        const { accessToken, refreshToken } = data;
-        useAuthStore.getState().setRefreshToken(accessToken, refreshToken);
-
-        console.log("Token refreshed successfully");
-      })
-      .catch(() => {
-        const { clearToken } = useAuthStore.getState();
-        clearToken();
-        message.error("Session expired. Please log in again.");
-        console.warn("Refresh token failed — cleared from store");
-      });
-
-    } else {  
-      const { clearToken } = useAuthStore.getState();
-      clearToken();
-      message.error("Please log in again.");
-      console.warn("Token expired — cleared from store");
+        .then((res) => res.json())
+        .then((data) => {
+          const { accessToken, refreshToken } = data;
+          useAuthStore.getState().setRefreshToken(accessToken, refreshToken);
+          console.log("Token refreshed successfully");
+        })
+        .catch(() => {
+          const { clearToken } = useAuthStore.getState();
+          clearToken();
+          message.error("Session expired. Please log in again.");
+          console.warn("Refresh token failed");
+        });
     }
+
     return Promise.reject(error);
   }
 );
-
 
 export const loginUser = async (username: string, password: string) => {
   const response = await api.post("/auth/login", {
     username,
     password,
-    expiresInMins: 2,
+    expiresInMins: 1,
   });
-  return response.data; 
+  return response.data;
 };
 
 export const getProfile = async () => {

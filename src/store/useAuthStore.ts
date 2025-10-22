@@ -1,59 +1,61 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type UserData ={
+type UserData = {
   id: number;
   username: string;
   email: string;
   firstName: string;
   lastName: string;
   image: string;
-  gender: string;}
+  gender: string;
+};
 
-  type loginInfo = {
-    accessToken: string;
-    refreshToken: string;
-  }& UserData;
-
-
-type AuthState ={
+type LoginInfo = {
   accessToken: string;
   refreshToken: string;
-  user: UserData ;
+} & UserData;
+
+type AuthState = {
+  accessToken: string | null;
+  refreshToken: string | null;
+  user: UserData | null;
   _hasHydrated: boolean;
   setToken: (token: string, user: UserData) => void;
-  setUser: (user: UserData) => void;
-  setRefreshToken: (token:string ,refreshToken: string) => void;
+  setUserInfo: (user: UserData) => void;
+  setRefreshToken: (token: string, refreshToken: string) => void;
   clearToken: () => void;
   setHydrated: (value: boolean) => void;
-  setLoginInfo: (data:loginInfo) => void;
-}
+  setLoginInfo: (data: LoginInfo) => void;
+};
 
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
-      token: undefined,
-      user: {} as UserData,
-      setLoginInfo: (data) => set({
-        accessToken: data.accessToken,
-        refreshToken: data.refreshToken,
-        user: {
-          id: data.id,
-          username: data.username,
-          email: data.email,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          image: data.image,  
-        }), 
+      accessToken: null,
+      refreshToken: null,
+      user: null,
       _hasHydrated: false,
-      setUser: (user) => set({ user }),
-      setToken: ( user) => set({  user }),
-      clearToken: () => set({ token: undefined, user: {} as UserData }),
+
+      setToken: (token, user) => set({ accessToken: token, user }),
+      setUserInfo: (user) => set({ user }),
+      setRefreshToken: (token, refreshToken) => set({ accessToken: token, refreshToken }),
+      clearToken: () => set({ accessToken: null, refreshToken: null, user: null }),
       setHydrated: (value) => set({ _hasHydrated: value }),
-      setRefreshToken: (token, refreshToken) => set((state) => ({
-        token,
-        user: { ...state.user, refreshToken },
-      })),
+      setLoginInfo: (data) =>
+        set({
+          accessToken: data.accessToken,
+          refreshToken: data.refreshToken,
+          user: {
+            id: data.id,
+            username: data.username,
+            email: data.email,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            image: data.image,
+            gender: data.gender,
+          },
+        }),
     }),
     {
       name: "auth-storage",
