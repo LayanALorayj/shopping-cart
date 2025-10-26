@@ -3,6 +3,7 @@ import { Button, Rate } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useCartStore } from "../../hooks";
 import styles from "./ProductDetailPage.module.css";
+import { useTranslation } from "react-i18next";
 
 interface ProductHeaderProps {
   product: any;
@@ -10,6 +11,7 @@ interface ProductHeaderProps {
 
 const ProductHeader: React.FC<ProductHeaderProps> = ({ product }) => {
   const addItem = useCartStore((state: any) => state.addItem);
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const handleAddToCart = () => {
     addItem({ id: product.id, product: product, quantity: 1 });
@@ -19,11 +21,11 @@ const ProductHeader: React.FC<ProductHeaderProps> = ({ product }) => {
   return (
     <div className={styles.header}>
       <div>
-        <div className={styles.brand}>Brand: {product.brand}</div>
+        <div className={styles.brand}>{t('product.brand')}: {product.brand}</div>
         <h1 className={styles.title}>{product.title}</h1>
         <div className={styles.rating}>
           <Rate allowHalf disabled defaultValue={product.rating} />
-          <span className={styles.ratingText}>({product.rating}/5)</span>
+          <span className={styles.ratingText}>({product.rating}/{t('common.ratingTotal')})</span>
         </div>
       </div>
 
@@ -38,7 +40,7 @@ const ProductHeader: React.FC<ProductHeaderProps> = ({ product }) => {
           </div>
         )}
         <div className={`${styles.stockStatus} ${product.stock > 0 ? styles.stockStatusInStock : styles.stockStatusOutOfStock}`}>
-          {product.stock > 0 ? `In Stock (${product.stock} available)` : 'Out of Stock'}
+          {product.stock > 0 ? t('product.inStock', { count: product.stock }) : t('product.outOfStock')}
         </div>
       </div>
 
@@ -50,7 +52,7 @@ const ProductHeader: React.FC<ProductHeaderProps> = ({ product }) => {
           onClick={handleAddToCart}
           disabled={product.stock === 0}
         >
-          {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
+          {product.stock > 0 ? t('product.addToCart') : t('product.outOfStock')}
         </Button>
         
       </div>

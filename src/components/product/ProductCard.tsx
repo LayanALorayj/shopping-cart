@@ -20,6 +20,7 @@ import {
 import type { Product } from "../../types/product";
 import "./ProductCard.css";
 import { useCartStore } from "../../hooks";
+import { useTranslation } from 'react-i18next';
 
 const { Text, Title } = Typography;
 
@@ -32,6 +33,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+   const { t } = useTranslation();
 
   const handleAddToCart = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -101,7 +103,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               zIndex: 2
             }}
           >
-            {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
+            {product.stock > 0 ? t("products.inStock") : t("products.outOfStock")}
           </Tag>
 
 
@@ -118,7 +120,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           block
           className="add-to-cart-btn"
         >
-          {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+          {product.stock === 0 ? t("products.outOfStock") : t("products.addToCart")}
         </Button>
       ]}
       onMouseEnter={() => setIsHovered(true)}

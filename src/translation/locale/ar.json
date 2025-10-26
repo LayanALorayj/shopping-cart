@@ -1,0 +1,108 @@
+{
+  "categories": {
+    "beauty": "الجمال",
+    "womens-dresses": "فساتين نسائية",
+    "womens-shoes": "أحذية نسائية",
+    "womens-watches": "ساعات نسائية",
+    "womens-bags": "حقائب نسائية",
+    "womens-jewellery": "مجوهرات نسائية"
+  },
+  "homepage": {
+    "title": "التصنيفات",
+    "loading": "جارٍ التحميل...",
+    "error": "حدث خطأ: {{error}}"
+  },
+  "cartPage": {
+    "title": "سلة التسوق",
+    "empty": "سلتك فارغة !",
+    "remove": "حذف",
+    "orderSummary": "ملخص الطلب",
+    "items": "المنتجات",
+    "total": "الإجمالي",
+    "continueShopping": "متابعة التسوق"
+  },
+  "header": {
+    "search": "البحث",
+    "contact": "اتصل بنا",
+    "cart": "السلة",
+    "profile": "الملف الشخصي",
+    "login": "تسجيل الدخول"
+  },
+  
+  "contact": {
+    "contactUs": "اتصل بنا",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "comment": "التعليق",
+    "enterName": "أدخل اسمك",
+    "enterEmail": "أدخل بريدك الإلكتروني",
+    "enterComment": "أدخل تعليقك",
+    "submit": "إرسال"
+  },
+  "product": {
+    "loading": "جارٍ تحميل المنتج...",
+     "brand": "العلامة التجارية",
+    "off": "خصم",
+    "inStock": "متوفر ({{count}} متاح)",
+    "outOfStock": "غير متوفر",
+    "addToCart": "إضافة للسلة"
+  },
+  "products": {
+    "allProducts": "جميع المنتجات",
+    "loading": "جارٍ التحميل...",
+    "noProducts": "لا توجد منتجات في هذه الفئة.",
+    "addToCart": "أضف إلى السلة",
+    "outOfStock": "نفذت الكمية",
+    "inStock": "متوفر"
+  },
+  "search": {
+    "searchProducts": "بحث المنتجات",
+    "placeholder": "ابحث عن المنتجات...",
+    "noResults": "لا توجد نتائج مطابقة"
+  },
+  "login": {
+    "welcome": "مرحبا",
+    "username": "اسم المستخدم",
+    "password": "كلمة المرور",
+    "enterUsername": "أدخل اسم المستخدم",
+    "enterPassword": "أدخل كلمة المرور",
+    "remember": "تذكرني",
+    "forgot": "نسيت كلمة المرور؟",
+    "login": "تسجيل الدخول",
+    "success": "تم تسجيل الدخول بنجاح!",
+    "invalid": "اسم المستخدم أو كلمة المرور غير صحيحة"
+  },
+  "profile": {
+    "loginFirst": "يرجى تسجيل الدخول أولا",
+    "unknown": "غير معروف",
+    "noEmail": "لا يوجد بريد إلكتروني",
+    "gender": "الجنس",
+    "logout": "تسجيل الخروج",
+    "loggedOut": "تم تسجيل الخروج بنجاح"
+  },
+  
+  "common": {
+    "ratingTotal": "من 5"
+  },
+  "tabs": {
+    "overview": "نظرة عامة",
+    "details": "التفاصيل",
+    "reviews": "المراجعات"
+  },
+  "details": {
+    "size": "الأبعاد",
+    "weight": "الوزن",
+    "weightUnit": "كجم",
+    "sku": "رمز المنتج"
+  },
+  "reviews": {
+    "noReviews": "لا توجد مراجعات بعد."
+  }
+}
+
+
+
+
+
+
+

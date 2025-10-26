@@ -1,0 +1,106 @@
+{
+  "categories": {
+    "beauty": "Beauty",
+    "womens-dresses": "Women's Dresses",
+    "womens-shoes": "Women's Shoes",
+    "womens-watches": "Women's Watches",
+    "womens-bags": "Women's Bags",
+    "womens-jewellery": "Women's Jewellery"
+  },
+  "homepage": {
+    "title": "Categories",
+    "loading": "Loading...",
+    "error": "Error: {{error}}"
+  },
+  "cartPage": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty !",
+    "remove": "Remove",
+    "orderSummary": "Order Summary",
+    "items": "Items",
+    "total": "Total",
+    "continueShopping": "Continue Shopping"
+  },
+  
+  "header": {
+    "search": "search",
+    "contact": "Contact Us",
+    "cart": "Cart",
+    "profile": "Profile",
+    "login": "Login"
+  },
+  
+  "contact": {
+    "contactUs": "Contact Us",
+    "name": "Name",
+    "email": "Email",
+    "comment": "Comment",
+    "enterName": "Enter your name",
+    "enterEmail": "Enter your email",
+    "enterComment": "Enter your comment",
+    "submit": "Submit"
+  },
+  "products": {
+    "loading": "Loading...",
+    "noProducts": "No products found in this category.",
+    "addToCart": "Add to Cart",
+    "outOfStock": "Out of Stock",
+    "inStock": "In Stock"
+  },
+  "search": {
+    "searchProducts": "Product Search",
+    "placeholder": "Search for products...",
+    "noResults": "No matching results"
+  },
+  "login": {
+    "welcome": "Welcome",
+    "username": "Username",
+    "password": "Password",
+    "enterUsername": "Enter your username",
+    "enterPassword": "Enter your password",
+    "remember": "Remember me",
+    "forgot": "Forgot password?",
+    "login": "Login",
+    "success": "Logged in successfully!",
+    "invalid": "Invalid username or password"
+  },
+  "profile": {
+    "loginFirst": "Please log in first",
+    "unknown": "Unknown",
+    "noEmail": "No email",
+    "gender": "Gender",
+    "logout": "Logout",
+    "loggedOut": "Logged out successfully"
+  },
+  "common": {
+    "ratingTotal": "5"
+  },
+  "product": {
+    "brand": "Brand",
+    "off": "OFF",
+    "inStock": "In Stock ({{count}} available)",
+    "outOfStock": "Out of Stock",
+    "addToCart": "Add to Cart",
+    "loading": "Loading product..."
+  },
+  "tabs": {
+    "overview": "Overview",
+    "details": "Details",
+    "reviews": "Reviews"
+  },
+  "details": {
+    "size": "Size",
+    "weight": "Weight",
+    "weightUnit": "kg",
+    "sku": "SKU"
+  },
+  "reviews": {
+    "noReviews": "No reviews yet."
+  }
+}
+
+
+
+
+
+

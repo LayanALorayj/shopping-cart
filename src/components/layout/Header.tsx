@@ -3,19 +3,21 @@ import { Layout, Badge, Button } from "antd";
 import { Link } from "react-router-dom";
 import {
   ShoppingCartOutlined,
-  HomeFilled,
-  FileTextFilled,
+  SearchOutlined,
+  PhoneFilled,
   MenuOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-// import useCartStore from "../../store/useCartStore";
 import useAuthStore from "../../hooks/useAuthStore";
 import useCartStore from "../../hooks/useCartStore";
 import logo from "../../assets/logoL.png";
+import LanguageToggle from "../LanguageToggle";
+import { useTranslation } from "react-i18next";
 
 const { Header: AntHeader } = Layout;
 
 const Header: React.FC = () => {
+  const { t } = useTranslation();
   const cartList = useCartStore((state) => state.cartList);
   const count = cartList.reduce((total, item) => total + item.quantity, 0);
   const { accessToken } = useAuthStore();
@@ -34,18 +36,19 @@ const Header: React.FC = () => {
 
       <nav className="nav-center nav-desktop">
         <div className="nav-circle">
-          <Link to="/" className="nav-item">
-            <HomeFilled className="nav-icon" /> Home
+            <Link to="/search" className="nav-item">
+             <SearchOutlined className="nav-icon" /> {t("header.search") || "Search"}
           </Link>
         </div>
         <div className="nav-circle">
           <Link to="/contact" className="nav-item">
-            <FileTextFilled className="nav-icon" /> Contact Us
+            <PhoneFilled className="nav-icon" /> {t("header.contact")}
           </Link>
         </div>
       </nav>
 
       <div className="header-right">
+        <LanguageToggle />
         <Link to="/cart" className="cart-link cart-desktop">
           <Badge
             count={count}
@@ -79,22 +82,21 @@ const Header: React.FC = () => {
 
       {menuOpen && (
         <div className="dropdown-menu">
-          <Link to="/" className="dropdown-item" onClick={() => setMenuOpen(false)}>
-            <HomeFilled className="nav-icon" /> Home
+          <Link  to="/search" className="dropdown-item" onClick={() => setMenuOpen(false)}>
+             <SearchOutlined className="nav-icon" /> {t("header.search") || "Search"}
           </Link>
           <Link to="/contact" className="dropdown-item" onClick={() => setMenuOpen(false)}>
-            <FileTextFilled className="nav-icon" /> Contact Us
+            <PhoneFilled className="nav-icon" /> {t("header.contact")}
           </Link>
           <Link to="/cart" className="dropdown-item" onClick={() => setMenuOpen(false)}>
-            <ShoppingCartOutlined className="nav-icon" /> Cart ({count})
+            <ShoppingCartOutlined className="nav-icon" /> {t("header.cart")} ({count})
           </Link>
-
           <Link
             to={accessToken ? "/profile" : "/login"}
             className="dropdown-item"
             onClick={() => setMenuOpen(false)}
           >
-            <UserOutlined className="nav-icon" /> {accessToken ? "Profile" : "Login"}
+            <UserOutlined className="nav-icon" /> {t(accessToken ? "header.profile" : "header.login")}
           </Link>
         </div>
       )}

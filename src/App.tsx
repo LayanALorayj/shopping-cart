@@ -1,8 +1,10 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ConfigProvider } from "antd";
 import { ErrorBoundary, Header } from "./components";
 import { THEME_CONFIG } from "./constants";
+import i18n from "./translation/i18n";
+import "./translation/i18n";
 import "./App.css";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
@@ -12,8 +14,14 @@ const CartPage = lazy(() => import("./pages/CartPage"));
 const ContactUs = lazy(() => import("./pages/ContactPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const ProfilePage = lazy(() => import("./pages/Profile"));
+const SearchPage = lazy(() => import("./pages/SearchPage"));
 
 const App: React.FC = () => {
+  
+  useEffect(() => {
+    document.documentElement.dir = i18n.dir();
+  }, [i18n.language]);
+
   return (
     <ErrorBoundary>
       <ConfigProvider
@@ -42,6 +50,7 @@ const App: React.FC = () => {
               <Route path="/contact" element={<ContactUs />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/search" element={<SearchPage />} />
             </Routes>
           </Suspense>
         </Router>

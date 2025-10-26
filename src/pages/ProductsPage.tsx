@@ -2,11 +2,13 @@ import React, { useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ClockCircleTwoTone } from "@ant-design/icons";
 import { Button, Space } from "antd";
+import { useTranslation } from "react-i18next";
 import { useProducts } from "../hooks/useProducts";
 import ProductCard from "../components/product/ProductCard";
 import "../App.css";
 
 const ProductsPage: React.FC = () => {
+  const { t } = useTranslation();
   const { category } = useParams<{ category: string }>();
   const navigate = useNavigate();
   const { categories, products, loading, error } = useProducts(category);
@@ -17,10 +19,10 @@ const ProductsPage: React.FC = () => {
   };
 
   const currentCategoryName = useMemo(() => {
-    if (!category || category === "all") return "All Products";
+    if (!category || category === "all") return t("products.allProducts");
     const cat = categories.find((c) => c.slug === category);
-    return cat ? cat.name : category;
-  }, [category, categories]);
+    return cat ? t(`categories.${cat.slug}`) || cat.name : category;
+  }, [category, categories, t]);
 
   if (loading)
     return (
@@ -29,7 +31,7 @@ const ProductsPage: React.FC = () => {
           twoToneColor="#bc6789"
           style={{ fontSize: "36px", marginRight: "10px" }}
         />
-        Loading...
+        {t("products.loading")}
       </p>
     );
 
@@ -48,12 +50,10 @@ const ProductsPage: React.FC = () => {
           {categories.map((cat) => (
             <Button
               key={cat.slug}
-              className={`category-btn ${
-                category === cat.slug ? "active" : ""
-              }`}
+              className={`category-btn ${category === cat.slug ? "active" : ""}`}
               onClick={() => handleCategoryClick(cat.slug)}
             >
-              {cat.name}
+              {t(`categories.${cat.slug}`) || cat.name}
             </Button>
           ))}
         </Space>
@@ -71,12 +71,10 @@ const ProductsPage: React.FC = () => {
         }}
       >
         {products.length > 0 ? (
-          products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))
+          products.map((product) => <ProductCard key={product.id} product={product} />)
         ) : (
           <p style={{ gridColumn: "1 / -1", textAlign: "center" }}>
-            No products found in this category.
+            {t("products.noProducts")}
           </p>
         )}
       </div>

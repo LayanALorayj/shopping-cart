@@ -1,16 +1,19 @@
 import React from "react";
 import { Tabs, Rate } from "antd";
 import styles from "./ProductDetailPage.module.css";
+import { useTranslation } from "react-i18next"; 
 
 interface ProductTabsProps {
   product: any;
 }
 
 const ProductTabs: React.FC<ProductTabsProps> = ({ product }) => {
+  const { t } = useTranslation(); 
+  
   const items = [
     {
       key: "1",
-      label: "Overview",
+      label: t('tabs.overview'), 
       children: (
         <div>
           <p>{product.description}</p>
@@ -28,18 +31,18 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ product }) => {
     },
     {
       key: "2",
-      label: "Details",
+      label: t('tabs.details'), 
       children: (
         <ul className={styles.detailsList}>
-          <li><strong>Size:</strong> <span>{product.dimensions?.width} x {product.dimensions?.height} x {product.dimensions?.depth}</span></li>
-          <li><strong>Weight:</strong> <span>{product.weight}kg</span></li>
-          <li><strong>SKU:</strong> <span>{product.sku}</span></li>
+          <li><strong>{t('details.size')}:</strong> <span>{product.dimensions?.width} x {product.dimensions?.height} x {product.dimensions?.depth}</span></li>
+          <li><strong>{t('details.weight')}:</strong> <span>{product.weight}{t('details.weightUnit')}</span></li> {/* kg تصبح كجم */}
+          <li><strong>{t('details.sku')}:</strong> <span>{product.sku}</span></li>
         </ul>
       ),
     },
     {
       key: "3",
-      label: "Reviews",
+      label: t('tabs.reviews'), 
       children: (
         <div className={styles.tabContent}>
           {product.reviews?.length > 0 ? (
@@ -57,7 +60,7 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ product }) => {
               </div>
             ))
           ) : (
-            <p>No reviews yet.</p>
+            <p>{t('reviews.noReviews')}</p> 
           )}
         </div>
       ),
