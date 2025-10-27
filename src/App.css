@@ -955,7 +955,6 @@ h1 {
   animation: dropdownFade 0.25s ease;
 }
 
-
 @media (max-width: 900px) {
   .contact-page-layout .ant-space {
     flex-direction: column !important;

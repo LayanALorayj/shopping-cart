@@ -22,7 +22,6 @@ const AppFooter = () => {
 
   return (
     <Footer className="footer-container">
-      {/* حقوق النشر في الأعلى بالوسط */}
       <div className="footer-copy-center">
         <Text className="footer-copy">
           © {new Date().getFullYear()} {t("footer.siteName")}.{" "}
@@ -49,7 +48,7 @@ const AppFooter = () => {
             <Space>
               <MailOutlined />
               <Link href="mailto:info@example.com" className="footer-link">
-                info@example.com
+                Layan@example.com
               </Link>
             </Space>
 
@@ -60,7 +59,6 @@ const AppFooter = () => {
           </Space>
         </Col>
 
-        {/* العمود الأيمن (روابط مفيدة) */}
         <Col xs={24} sm={24} md={12} className="footer-right">
           <Title level={5} className="footer-title">
             {t("footer.usefulLinks")}
