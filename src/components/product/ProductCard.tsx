@@ -1,26 +1,11 @@
 import React, { useState } from "react";
-import { 
-  ShoppingCartOutlined, 
-  EyeOutlined, 
-  HeartOutlined
-} from "@ant-design/icons";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { 
-  Card, 
-  Button, 
-  Badge, 
-  Tooltip, 
-  Rate, 
-  Tag, 
-  Space, 
-  Typography, 
-  Image
-} from "antd";
-// import useCartStore from "../../hooks/useCartStore";
+import { Card, Button, Tag, Space, Typography, Image, Rate } from "antd";
 import type { Product } from "../../types/product";
 import "./ProductCard.css";
 import { useCartStore } from "../../hooks";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 const { Text, Title } = Typography;
 
@@ -31,15 +16,13 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addItem } = useCartStore();
   const navigate = useNavigate();
-  const [isHovered, setIsHovered] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-   const { t } = useTranslation();
+  const { t } = useTranslation();
 
   const handleAddToCart = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setIsLoading(true);
-    
-    // Simulate loading for better UX
+
     setTimeout(() => {
       addItem(product);
       setIsLoading(false);
@@ -50,26 +33,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     navigate(`/product/${product.id}`);
   };
 
-  const handleQuickView = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    // Quick view functionality can be implemented here
-    console.log("Quick view:", product.title);
-  };
-
-  const handleWishlist = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    // Wishlist functionality can be implemented here
-    console.log("Added to wishlist:", product.title);
-  };
-
-  const discountPrice = product.discountPercentage 
-    ? product.price - (product.price * product.discountPercentage / 100)
+  const discountPrice = product.discountPercentage
+    ? product.price - product.price * (product.discountPercentage / 100)
     : product.price;
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
       minimumFractionDigits: 0,
       maximumFractionDigits: 2,
     }).format(price);
@@ -89,24 +60,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             loading="lazy"
             onClick={handleViewDetails}
           />
-          
-         
-
-          {/* Stock Status */}
           <Tag
-            color={product.stock > 0 ? 'success' : 'error'}
+            color={product.stock > 0 ? "success" : "error"}
             className="stock-status"
             style={{
-              position: 'absolute',
+              position: "absolute",
               top: 8,
               right: 8,
-              zIndex: 2
+              zIndex: 2,
             }}
           >
-            {product.stock > 0 ? t("products.inStock") : t("products.outOfStock")}
+            {product.stock > 0
+              ? t("products.inStock")
+              : t("products.outOfStock")}
           </Tag>
-
-
         </div>
       }
       actions={[
@@ -120,58 +87,54 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           block
           className="add-to-cart-btn"
         >
-          {product.stock === 0 ? t("products.outOfStock") : t("products.addToCart")}
-        </Button>
+          {product.stock === 0
+            ? t("products.outOfStock")
+            : t("products.addToCart")}
+        </Button>,
       ]}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       <Card.Meta
         title={
-          <Space direction="vertical" size="small" style={{ width: '100%' }}>
-            {/* Brand */}
+          <Space direction="vertical" size="small" style={{ width: "100%" }}>
             <Tag color="blue" className="product-brand">
               {product.brand}
             </Tag>
-            
-            {/* Title */}
-            <Title 
-              level={5} 
+
+            <Title
+              level={5}
               className="product-title"
               onClick={handleViewDetails}
-              style={{ 
-                margin: 0, 
-                cursor: 'pointer',
-                display: '-webkit-box',
+              style={{
+                margin: 0,
+                cursor: "pointer",
+                display: "-webkit-box",
                 WebkitLineClamp: 2,
-                WebkitBoxOrient: 'vertical',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                minHeight: '2.4em'
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                minHeight: "2.4em",
               }}
             >
               {product.title}
             </Title>
 
-            {/* Rating */}
             <Space align="center" size="small">
-              <Rate 
-                disabled 
-                defaultValue={Math.round(product.rating)} 
-                style={{ fontSize: '12px' }}
+              <Rate
+                disabled
+                defaultValue={Math.round(product.rating)}
+                style={{ fontSize: "12px" }}
               />
-              <Text type="secondary" style={{ fontSize: '12px' }}>
+              <Text type="secondary" style={{ fontSize: "12px" }}>
                 ({product.rating})
               </Text>
             </Space>
 
-            {/* Price */}
             <Space align="baseline" size="small">
-              <Text strong style={{ fontSize: '18px', color: '#333' }}>
+              <Text strong style={{ fontSize: "18px", color: "#333" }}>
                 {formatPrice(discountPrice)}
               </Text>
               {product.discountPercentage > 0 && (
-                <Text delete type="secondary" style={{ fontSize: '14px' }}>
+                <Text delete type="secondary" style={{ fontSize: "14px" }}>
                   {formatPrice(product.price)}
                 </Text>
               )}

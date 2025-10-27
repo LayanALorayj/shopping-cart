@@ -13,6 +13,8 @@ import useCartStore from "../../hooks/useCartStore";
 import logo from "../../assets/logoL.png";
 import LanguageToggle from "../LanguageToggle";
 import { useTranslation } from "react-i18next";
+import HeaderSearch from "./HeaderSearch";
+
 
 const { Header: AntHeader } = Layout;
 
@@ -35,16 +37,7 @@ const Header: React.FC = () => {
       </div>
 
       <nav className="nav-center nav-desktop">
-        <div className="nav-circle">
-            <Link to="/search" className="nav-item">
-             <SearchOutlined className="nav-icon" /> {t("header.search") || "Search"}
-          </Link>
-        </div>
-        <div className="nav-circle">
-          <Link to="/contact" className="nav-item">
-            <PhoneFilled className="nav-icon" /> {t("header.contact")}
-          </Link>
-        </div>
+        <HeaderSearch />
       </nav>
 
       <div className="header-right">

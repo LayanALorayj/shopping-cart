@@ -27,7 +27,9 @@
     "contact": "Contact Us",
     "cart": "Cart",
     "profile": "Profile",
-    "login": "Login"
+    "login": "Login",
+    "searchPlaceholder": "Search...",
+    "viewAllResults": "View all results"
   },
   
   "contact": {
@@ -96,6 +98,16 @@
   },
   "reviews": {
     "noReviews": "No reviews yet."
+  },
+  "footer": {
+    "siteName": "My Website",
+    "contactUs": "Contact Us",
+    "location": "Riyadh, Saudi Arabia",
+    "usefulLinks": "Useful Links",
+    "aboutUs": "About Us",
+    "privacyPolicy": "Privacy Policy",
+    "termsConditions": "Terms & Conditions",
+    "rightsReserved": "All rights reserved."
   }
 }
 

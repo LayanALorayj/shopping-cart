@@ -1,5 +1,6 @@
 // Layout Components
 export { default as Header } from './layout/Header';
+export { default as AppFooter } from './layout/Footer';
 
 // Product Components
 export { default as ProductCard } from './product/ProductCard';

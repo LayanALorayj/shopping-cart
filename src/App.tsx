@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ConfigProvider } from "antd";
-import { ErrorBoundary, Header } from "./components";
+import { ErrorBoundary, Header ,AppFooter} from "./components";
 import { THEME_CONFIG } from "./constants";
 import i18n from "./translation/i18n";
 import "./translation/i18n";
@@ -53,6 +53,7 @@ const App: React.FC = () => {
               <Route path="/search" element={<SearchPage />} />
             </Routes>
           </Suspense>
+           <AppFooter />
         </Router>
       </ConfigProvider>
     </ErrorBoundary>

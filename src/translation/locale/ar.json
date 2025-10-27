@@ -26,7 +26,9 @@
     "contact": "اتصل بنا",
     "cart": "السلة",
     "profile": "الملف الشخصي",
-    "login": "تسجيل الدخول"
+    "login": "تسجيل الدخول",
+    "searchPlaceholder": "ابحث...",
+    "viewAllResults": "عرض كل النتائج"
   },
   
   "contact": {
@@ -97,8 +99,20 @@
   },
   "reviews": {
     "noReviews": "لا توجد مراجعات بعد."
+  },
+  "footer": {
+    "siteName": "موقعي",
+    "description": "وصف قصير عن الموقع — يمكنك كتابة شعار الموقع أو الغرض منه هنا.",
+    "contactUs": "تواصل معنا",
+    "location": "الرياض، المملكة العربية السعودية",
+    "usefulLinks": "روابط مفيدة",
+    "aboutUs": "عنّا",
+    "privacyPolicy": "سياسة الخصوصية",
+    "termsConditions": "الشروط والأحكام",
+    "rightsReserved": "كل الحقوق محفوظة."
   }
 }
+
 
 
 

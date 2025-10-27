@@ -114,7 +114,9 @@ import { formatPrice } from '../utils';
 
 #### **Theme Configuration**
 ```typescript
-<ConfigProvider theme={{ token: { colorPrimary: '#1890ff' } }}>
+{% raw %}
+{{ token: { colorPrimary: '#1890ff' } }}
+{% endraw %}
   <App />
 </ConfigProvider>
 ```
