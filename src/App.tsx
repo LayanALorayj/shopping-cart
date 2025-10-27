@@ -23,18 +23,20 @@ const App: React.FC = () => {
   }, [i18n.language]);
 
   return (
-    <ErrorBoundary>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: THEME_CONFIG.primaryColor,
-            borderRadius: THEME_CONFIG.borderRadius,
-            fontFamily: THEME_CONFIG.fontFamily,
-          },
-        }}
-      >
-        <Router>
-          <Header />
+      <ErrorBoundary>
+  <ConfigProvider
+    theme={{
+      token: {
+        colorPrimary: THEME_CONFIG.primaryColor,
+        borderRadius: THEME_CONFIG.borderRadius,
+        fontFamily: THEME_CONFIG.fontFamily,
+      },
+    }}
+  >
+    <Router>
+      <div className="app-container">
+        <Header />
+        <div className="app-content">
           <Suspense
             fallback={
               <div style={{ textAlign: "center", marginTop: "100px", fontSize: "18px" }}>
@@ -53,10 +55,12 @@ const App: React.FC = () => {
               <Route path="/search" element={<SearchPage />} />
             </Routes>
           </Suspense>
-           <AppFooter />
-        </Router>
-      </ConfigProvider>
-    </ErrorBoundary>
+        </div>
+        <AppFooter />
+      </div>
+    </Router>
+  </ConfigProvider>
+</ErrorBoundary>
   );
 };
 

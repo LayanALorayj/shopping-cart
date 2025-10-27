@@ -65,16 +65,6 @@ const AppFooter = () => {
           </Title>
 
           <Space direction="vertical" size="small" className="footer-links">
-            <Link href="#" className="footer-link">
-              {t("footer.aboutUs")}
-            </Link>
-            <Link href="#" className="footer-link">
-              {t("footer.privacyPolicy")}
-            </Link>
-            <Link href="#" className="footer-link">
-              {t("footer.termsConditions")}
-            </Link>
-
             <div className="footer-social">
               <Link
                 href="https://github.com/LayanALorayj/shopping-cart"
