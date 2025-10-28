@@ -1,64 +1,76 @@
-import React, { useEffect, useState } from "react";
-import { useCart } from "../context/CartContext"; 
-import { useNavigate } from "react-router-dom";  
-import { DeleteOutlined } from "@ant-design/icons";
-import { HeartTwoTone  } from '@ant-design/icons';
-import "../App.css";
-
-interface CartItem {
-  name: string;
-  price: number;
-  image: string;
-}
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { DeleteOutlined, HeartTwoTone } from "@ant-design/icons";
+import useCartStore from "../hooks/useCartStore";
+import { useTranslation } from "react-i18next";
+import styles from "./CartPage.module.css";
 
 const CartPage: React.FC = () => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const { updateCountFromStorage } = useCart(); 
+  const { cartList, removeItem, loadCartFromStorage } = useCartStore();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
-    const storedItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    setCartItems(storedItems);
-  }, []);
+    loadCartFromStorage();
+  }, [loadCartFromStorage]);
 
-  const handleRemoveItem = (indexToRemove: number) => {
-    const updatedItems = cartItems.filter((_, index) => index !== indexToRemove);
-    setCartItems(updatedItems);
-    localStorage.setItem("cartItems", JSON.stringify(updatedItems));
-    updateCountFromStorage(); 
-  };
+  const totalPrice = cartList.reduce(
+    (sum, item) => sum + item.product.price * item.quantity,
+    0
+  );
 
   return (
-    <div className="cart-container">
-      <h2>Your Cart </h2>
+    <div className={styles.container}>
+      <h2 className={styles.title}>{t("cartPage.title")}</h2>
 
-      {cartItems.length === 0 ? (
-        <p>Your cart is empty  <HeartTwoTone twoToneColor="#934f74ff" /> ! </p>
+      {cartList.length === 0 ? (
+        <div className={styles.emptyMessage}>
+          {t("cartPage.empty")} <HeartTwoTone twoToneColor="#bc6789" />
+        </div>
       ) : (
-        <div className="cart-products-container">
-          {cartItems.map((item, index) => (
-            <div key={index} className="product-card">
-              <img src={item.image} alt={item.name} />
-              <h3>{item.name}</h3>
-              <p>{item.price} $</p>
-           <button 
-                onClick={() => handleRemoveItem(index)}
-                className="remove-button"
+        <>
+          <div className={styles.productsContainer}>
+            {cartList.map((item) => (
+              <div key={item.id} className={styles.productCard}>
+                <img src={item.product.thumbnail} alt={item.product.title} />
+                <h3>{item.product.title}</h3>
+                <p>
+                  ${item.product.price} x {item.quantity}
+                </p>
+                <button
+                  onClick={() => removeItem(item.id)}
+                  className={styles.removeButton}
                 >
-                <DeleteOutlined style={{ marginRight: "6px" }} />
-                Remove
+                  <DeleteOutlined />
+                  {t("cartPage.remove")}
                 </button>
+              </div>
+            ))}
+          </div>
+
+          <div className={styles.cartSummary}>
+            <h3 className={styles.summaryTitle}>{t("cartPage.orderSummary")}</h3>
+            <div className={styles.summaryItem}>
+              <span className={styles.summaryLabel}>
+                {t("cartPage.items")} ({cartList.length})
+              </span>
+              <span className={styles.summaryValue}>{cartList.length}</span>
             </div>
-          ))}
-        </div>  
+            <div className={styles.summaryItem}>
+              <span className={styles.summaryLabel}>{t("cartPage.total")}</span>
+              <span className={styles.summaryValue}>
+                ${totalPrice.toFixed(2)}
+              </span>
+            </div>
+          </div>
+        </>
       )}
 
-      
       <button
         onClick={() => navigate("/")}
-        className="back-home-button"
+        className={styles.continueButton}
       >
-       Continue Shopping 
+        {t("cartPage.continueShopping")}
       </button>
     </div>
   );
