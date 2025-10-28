@@ -56,15 +56,16 @@
   },
   "login": {
     "welcome": "Welcome",
-    "username": "Username",
+    "email": "Email",
     "password": "Password",
-    "enterUsername": "Enter your username",
-    "enterPassword": "Enter your password",
+    "enterEmail": "Enter your Email",
+    "enterPassword": "Enter your Email",
     "remember": "Remember me",
     "forgot": "Forgot password?",
     "login": "Login",
     "success": "Logged in successfully!",
-    "invalid": "Invalid username or password"
+    "invalid": "Invalid Email or password",
+    "loginWithGoogle": "login With Google"
   },
   "profile": {
     "loginFirst": "Please log in first",
@@ -103,7 +104,6 @@
     "siteName": "My Website",
     "contactUs": "Contact Us",
     "location": "Riyadh, Saudi Arabia",
-    "usefulLinks": "Useful Links",
     "aboutUs": "About Us",
     "privacyPolicy": "Privacy Policy",
     "termsConditions": "Terms & Conditions",

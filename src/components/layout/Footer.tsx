@@ -22,13 +22,6 @@ const AppFooter = () => {
 
   return (
     <Footer className="footer-container">
-      <div className="footer-copy-center">
-        <Text className="footer-copy">
-          © {new Date().getFullYear()} {t("footer.siteName")}.{" "}
-          {t("footer.rightsReserved")}
-        </Text>
-      </div>
-
       <Row justify="space-between" align="top" gutter={[16, 16]}>
         <Col xs={24} sm={24} md={12}>
           <Title
@@ -42,13 +35,13 @@ const AppFooter = () => {
           <Space direction="vertical" size="small">
             <Space>
               <PhoneOutlined />
-              <Text className="footer-text">+966 5X XXX XXXX</Text>
+              <Text className="footer-text">+966 53 353 0734</Text>
             </Space>
 
             <Space>
               <MailOutlined />
-              <Link href="mailto:info@example.com" className="footer-link">
-                Layan@example.com
+              <Link href="mailto:LayanAlorayj@Outlook.com" className="footer-link">
+                LayanAlorayj@Outlook.com
               </Link>
             </Space>
 
@@ -61,22 +54,26 @@ const AppFooter = () => {
 
         <Col xs={24} sm={24} md={12} className="footer-right">
           <Title level={5} className="footer-title">
-            {t("footer.usefulLinks")}
+            GitHub
           </Title>
-
-          <Space direction="vertical" size="small" className="footer-links">
-            <div className="footer-social">
-              <Link
-                href="https://github.com/LayanALorayj/shopping-cart"
-                target="_blank"
-                aria-label="GitHub"
-              >
-                <GithubOutlined style={{ fontSize: 20, color: "#bc6789" }} />
-              </Link>
-            </div>
-          </Space>
+          <div className="footer-social">
+            <Link
+              href="https://github.com/LayanALorayj/shopping-cart"
+              target="_blank"
+              aria-label="GitHub"
+            >
+              <GithubOutlined style={{ fontSize: 24 }} />
+            </Link>
+          </div>
         </Col>
       </Row>
+
+      <div className="footer-copy-center">
+        <Text className="footer-copy">
+          © {new Date().getFullYear()} {t("footer.siteName")}.{" "}
+          {t("footer.rightsReserved")}
+        </Text>
+      </div>
     </Footer>
   );
 };

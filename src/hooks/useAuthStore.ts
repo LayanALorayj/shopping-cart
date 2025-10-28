@@ -9,6 +9,8 @@ interface User {
   lastName: string;
   gender: string;
   image: string;
+  displayName: string;
+  photoURL: string;
 }
 
 interface AuthStore {
