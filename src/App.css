@@ -116,7 +116,7 @@ html[dir="rtl"] .nav-item {
 
 .product-card img {
   width: 100%;
-  height: 160px;
+  /* height: 160px; */
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 10px;
@@ -228,7 +228,7 @@ h1 {
 
 .product-card img {
   width: 100%;
-  height: 180px;
+  /* height: 180px; */
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 10px;
@@ -316,6 +316,7 @@ h1 {
   grid-template-columns: repeat(4, minmax(0, 1fr)); 
   gap: 18px;
   align-items: stretch;
+  overflow-x: hidden;
 }
 
 .category-card {
@@ -795,6 +796,7 @@ h1 {
   margin-bottom: 10px !important;
   cursor: pointer;
   transition: color 0.3s ease;
+  margin-top: 1.5rem;
 }
 
 .footer-title:hover {
@@ -985,10 +987,13 @@ h1 {
 @media (max-width: 768px) {
   .footer-container {
     text-align: center;
+    overflow-x: hidden;
+    padding: 0 10px;
   }
 
   .footer-right {
     text-align: center;
+    justify-content: center !important;
   }
 
   .footer-links {
@@ -1147,4 +1152,18 @@ h1 {
     padding: 1rem;
     gap: 1rem;
   }
+}
+@media (max-width: 768px) {
+  .footer-right {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .footer-social {
+    text-align: center;
+    width: 100%;
+  }
+}
+html, body {
+  overflow-x: hidden;
 }

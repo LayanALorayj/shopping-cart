@@ -56,7 +56,7 @@
 
 .productCard img {
   width: 100%;
-  height: 200px;
+  /* height: 200px; */
   object-fit: cover;
   border-radius: 12px;
   margin-bottom: 16px;
@@ -214,10 +214,6 @@
     padding: 16px;
   }
   
-  .productCard img {
-    height: 160px;
-  }
-  
   .productCard h3 {
     font-size: 16px;
   }
@@ -250,10 +246,6 @@
   
   .productCard {
     padding: 12px;
-  }
-  
-  .productCard img {
-    height: 140px;
   }
   
   .continueButton {
