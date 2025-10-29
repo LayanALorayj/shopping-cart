@@ -40,7 +40,7 @@ const AppFooter = () => {
                 className="footer-link"
                 style={{ color: "#ffffff" }}
               >
-                +966 53 353 0734
+                +966 5x xxx xxxx
               </Link>
             </Space>
 
