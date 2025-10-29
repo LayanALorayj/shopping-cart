@@ -1167,32 +1167,3 @@ h1 {
 html, body {
   overflow-x: hidden;
 }
-
-/* iPad (landscape & portrait) Fix */
-@media (min-width: 768px) and (max-width: 1024px) {
-  html, body {
-    overflow-x: hidden !important;
-  }
-
-  .category-grid, 
-  .custom-grid-layout, 
-  .ant-row {
-    margin: 0 auto !important;
-    justify-content: center !important;
-  }
-
-  .ant-col {
-    max-width: 100% !important;
-  }
-
-  .ant-layout-content, 
-  .ant-layout {
-    padding: 0 10px !important;
-  }
-
-  .footer-container, 
-  .custom-header {
-    justify-content: center !important;
-    text-align: center !important;
-  }
-}
