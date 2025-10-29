@@ -871,6 +871,100 @@ h1 {
   box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
 }
 
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f6f7;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 30px 40px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.register-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+.register-title {
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.register-subtitle {
+  color: #777;
+  display: block;
+  margin-bottom: 25px;
+}
+
+.register-form .ant-form-item-label > label {
+  color: #444;
+  font-weight: 500;
+}
+
+.register-form .ant-input-affix-wrapper {
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+
+.register-btn {
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 10px;
+  background-color:linear-gradient(135deg, #ff85b3, #ff69b4);
+  border: none;
+}
+
+.register-btn:hover {
+  background-color: #6a4fe0 !important;
+}
+
+.register-footer {
+  margin-top: 25px;
+  font-size: 15px;
+}
+
+.register-footer a {
+  color: #ff69b4;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-footer a:hover {
+  text-decoration: underline;
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 15px;
+  color: #555;
+}
+
+.login-footer a {
+  color: #ff69b4;
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+
+
 @media (max-width: 768px) {
   .footer-container {
     text-align: center;

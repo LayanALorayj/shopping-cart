@@ -1,5 +1,5 @@
-import React from "react";
-import { Form, Input, Button, Checkbox, message, Space } from "antd";
+import React, { useState } from "react";
+import { Form, Input, Button, Checkbox, Space } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { GoogleOutlined } from "@ant-design/icons";
@@ -12,46 +12,69 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const { login } = useAuthStore();
 
-  const mapFirebaseUserToStoreUser = (firebaseUser: import("firebase/auth").User) => ({
-    id: Number(firebaseUser.uid.substring(0, 8)), 
-  username: firebaseUser.email || "",
-  email: firebaseUser.email || "",
-  firstName: firebaseUser.displayName?.split(" ")[0] || "",
-  lastName: firebaseUser.displayName?.split(" ")[1] || "",
-  gender: "",
-  image: firebaseUser.photoURL || "",
-  displayName: firebaseUser.displayName || "",
-  photoURL: firebaseUser.photoURL || "", 
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const mapFirebaseUserToStoreUser = (
+    firebaseUser: import("firebase/auth").User
+  ) => ({
+    id: Number(firebaseUser.uid.substring(0, 8)),
+    username: firebaseUser.email || "",
+    email: firebaseUser.email || "",
+    firstName: firebaseUser.displayName?.split(" ")[0] || "",
+    lastName: firebaseUser.displayName?.split(" ")[1] || "",
+    gender: "",
+    image: firebaseUser.photoURL || "",
+    displayName: firebaseUser.displayName || "",
+    photoURL: firebaseUser.photoURL || "",
   });
 
   const handleLoginWithEmail = async (values: any) => {
+    setErrorMessage("");
+    setLoading(true);
     try {
-      const result = await firebaseAuthService.loginWithEmail(values.email, values.password);
+      const result = await firebaseAuthService.loginWithEmail(
+        values.email,
+        values.password
+      );
       const token = await result.user.getIdToken();
       const user = mapFirebaseUserToStoreUser(result.user);
 
       login(user, { accessToken: token, refreshToken: token });
-      message.success(t("login.success"));
       navigate("/profile");
     } catch (err: any) {
-      console.error(err);
-      message.error(t("login.invalid"));
+      console.error("Firebase login error:", err);
+
+      const code = err.code || err.message || "";
+
+      if (code.includes("invalid-email")) {
+        setErrorMessage(t("login.invalidEmail"));
+      } else if (code.includes("user-not-found")) {
+        setErrorMessage(t("login.userNotFound"));
+      } else if (code.includes("wrong-password")) {
+        setErrorMessage(t("login.wrongPassword"));
+      } else if (code.includes("too-many-requests")) {
+        setErrorMessage(t("login.tooManyRequests"));
+      } else {
+        setErrorMessage(t("login.firebaseError"));
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleGoogleLogin = async () => {
+    setErrorMessage(""); 
     try {
       const result = await firebaseAuthService.loginWithGoogle();
-      console.log("Google user:", result.user);
       const token = await result.user.getIdToken();
       const user = mapFirebaseUserToStoreUser(result.user);
 
       login(user, { accessToken: token, refreshToken: token });
-      message.success("Logged in with Google");
       navigate("/profile");
     } catch (err: any) {
       console.error(err);
-      message.error("Google login failed");
+      setErrorMessage(t("login.googleError"));
     }
   };
 
@@ -59,6 +82,22 @@ const Login: React.FC = () => {
     <div className="login-page">
       <div className="login-card">
         <h2 className="login-title">{t("login.welcome")}</h2>
+
+        {errorMessage && (
+          <div
+            style={{
+              color: "red",
+              textAlign: "center",
+              marginTop: "10px",
+              fontSize: "14px",
+              background: "#ffe6e6",
+              padding: "8px",
+              borderRadius: "8px",
+            }}
+          >
+            {errorMessage}
+          </div>
+        )}
 
         <Form
           name="login"
@@ -68,7 +107,7 @@ const Login: React.FC = () => {
           autoComplete="off"
         >
           <Form.Item
-            name="Email"
+            name="email"
             label={t("login.email")}
             rules={[{ required: true, message: t("login.enterEmail") }]}
           >
@@ -91,7 +130,7 @@ const Login: React.FC = () => {
           </div>
 
           <Form.Item style={{ marginTop: 20 }}>
-            <Button type="primary" htmlType="submit" block>
+            <Button type="primary" htmlType="submit" block loading={loading}>
               {t("login.login")}
             </Button>
           </Form.Item>
@@ -106,6 +145,13 @@ const Login: React.FC = () => {
               {t("login.loginWithGoogle")}
             </Button>
           </Space>
+
+          <div className="login-footer" style={{ marginTop: "15px" }}>
+            <span>{t("login.noAccount")} </span>
+            <a onClick={() => navigate("/register")}>
+              {t("login.createAccount")}
+            </a>
+          </div>
         </Form>
       </div>
     </div>
