@@ -132,7 +132,8 @@
     "emailInvalid": "Please enter a valid email address",
     "passwordError": "Please enter your password",
     "confirmError": "Please confirm your password",
-    "passwordMismatch": "Passwords do not match"
+    "passwordMismatch": "Passwords do not match",
+    "google": "Register With Google"
   }
 }
 

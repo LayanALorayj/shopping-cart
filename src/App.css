@@ -790,7 +790,7 @@ h1 {
 }
 
 .footer-title {
-  color: #f6d5e3 !important;
+  color: #ffffff !important;
   font-weight: 600 !important;
   margin-bottom: 10px !important;
   cursor: pointer;
@@ -802,12 +802,12 @@ h1 {
 }
 
 .footer-link {
-  color: #ddd !important;
+  color: #ffffff !important;
 }
 
 .footer-text,
 .footer-link {
-  color: #e5d8e8;
+  color: #ffffff;
   font-size: 14px;
   transition: color 0.3s ease;
 }
@@ -823,13 +823,30 @@ h1 {
 }
 
 .footer-social a {
-  color: #ffb3d1;
+  color: #ffffff;
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .footer-social a:hover {
   transform: scale(1.3);
+  color: #100f0f;
+}
+
+.footer-copy-center {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 15px;
+  margin-top: 40px;
+}
+
+.github-icon {
   color: #ffffff;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.github-icon:hover {
+  color: #000000;
+  transform: scale(1.2);
 }
 
 .footer-copy-center {

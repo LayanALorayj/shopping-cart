@@ -34,42 +34,53 @@ const AppFooter = () => {
 
           <Space direction="vertical" size="small">
             <Space>
-              <PhoneOutlined />
-              <Text className="footer-text">+966 53 353 0734</Text>
+              <PhoneOutlined style={{ color: "#ffffff" }} />
+              <Link
+                href="tel:+966533530734"
+                className="footer-link"
+                style={{ color: "#ffffff" }}
+              >
+                +966 53 353 0734
+              </Link>
             </Space>
 
             <Space>
-              <MailOutlined />
-              <Link href="mailto:LayanAlorayj@Outlook.com" className="footer-link">
+              <MailOutlined style={{ color: "#ffffff" }} />
+              <Link
+                href="mailto:LayanAlorayj@Outlook.com"
+                target="_blank"
+                className="footer-link"
+                style={{ color: "#ffffff" }}
+              >
                 LayanAlorayj@Outlook.com
               </Link>
             </Space>
 
             <Space>
-              <EnvironmentOutlined />
-              <Text className="footer-text">{t("footer.location")}</Text>
+              <EnvironmentOutlined style={{ color: "#ffffff" }} />
+              <Text className="footer-text" style={{ color: "#ffffff" }}>
+                {t("footer.location")}
+              </Text>
             </Space>
           </Space>
         </Col>
 
         <Col xs={24} sm={24} md={12} className="footer-right">
-          <Title level={5} className="footer-title">
-            GitHub
-          </Title>
           <div className="footer-social">
             <Link
               href="https://github.com/LayanALorayj/shopping-cart"
               target="_blank"
               aria-label="GitHub"
+              className="github-icon"
             >
-              <GithubOutlined style={{ fontSize: 24 }} />
+              <GithubOutlined style={{ fontSize: 28}} />
             </Link>
           </div>
         </Col>
       </Row>
 
       <div className="footer-copy-center">
-        <Text className="footer-copy">
+        <Text className="footer-copy" style={{ color: "#ffffff" }}>
           © {new Date().getFullYear()} {t("footer.siteName")}.{" "}
           {t("footer.rightsReserved")}
         </Text>
