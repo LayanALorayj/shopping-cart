@@ -1,4 +1,4 @@
-import { Layout, Row, Col, Typography, Space } from "antd";
+import { Layout, Typography, Space } from "antd";
 import {
   PhoneOutlined,
   MailOutlined,
@@ -21,63 +21,63 @@ const AppFooter = () => {
   };
 
   return (
-    <Footer className="footer-container">
-      <Row justify="space-between" align="top" gutter={[16, 16]}>
-        <Col xs={24} sm={24} md={12}>
-          <Title
-            level={5}
-            className="footer-title footer-link"
-            onClick={handleContactClick}
-          >
-            {t("footer.contactUs")}
-          </Title>
+    <Footer className="footer-container" style={{ textAlign: "center" }}>
+      <Title
+        level={5}
+        className="footer-title footer-link"
+        onClick={handleContactClick}
+        style={{ display: "inline-block" }}
+      >
+        {t("footer.contactUs")}
+      </Title>
 
-          <Space direction="vertical" size="small">
-            <Space>
-              <PhoneOutlined style={{ color: "#ffffff" }} />
-              <Link
-                href="tel:+966533530734"
-                className="footer-link"
-                style={{ color: "#ffffff" }}
-              >
-                +966 5x xxx xxxx
-              </Link>
-            </Space>
-
-            <Space>
-              <MailOutlined style={{ color: "#ffffff" }} />
-              <Link
-                href="mailto:LayanAlorayj@Outlook.com"
-                target="_blank"
-                className="footer-link"
-                style={{ color: "#ffffff" }}
-              >
-                LayanAlorayj@Outlook.com
-              </Link>
-            </Space>
-
-            <Space>
-              <EnvironmentOutlined style={{ color: "#ffffff" }} />
-              <Text className="footer-text" style={{ color: "#ffffff" }}>
-                {t("footer.location")}
-              </Text>
-            </Space>
-          </Space>
-        </Col>
-
-        <Col xs={24} sm={24} md={12} className="footer-right">
-          <div className="footer-social">
+      <div className="footer-info-group">
+        <Space
+          size="large"
+          wrap
+          align="center"
+          className="footer-info-space"
+        >
+          <Space>
+            <PhoneOutlined style={{ color: "#ffffff" }} />
             <Link
-              href="https://github.com/LayanALorayj/shopping-cart"
-              target="_blank"
-              aria-label="GitHub"
-              className="github-icon"
+              href="tel:+966533530734"
+              className="footer-link"
+              style={{ color: "#ffffff" }}
             >
-              <GithubOutlined style={{ fontSize: 28}} />
+              +966 5x xxx xxxx
             </Link>
-          </div>
-        </Col>
-      </Row>
+          </Space>
+
+          <Space>
+            <MailOutlined style={{ color: "#ffffff" }} />
+            <Link
+              href="mailto:LayanAlorayj@Outlook.com"
+              target="_blank"
+              className="footer-link"
+              style={{ color: "#ffffff" }}
+            >
+              LayanAlorayj@Outlook.com
+            </Link>
+          </Space>
+
+          <Space>
+            <EnvironmentOutlined style={{ color: "#ffffff" }} />
+            <Text className="footer-text" style={{ color: "#ffffff" }}>
+              {t("footer.location")}
+            </Text>
+          </Space>
+
+          <Link
+            href="https://github.com/LayanALorayj/shopping-cart"
+            target="_blank"
+            aria-label="GitHub"
+            className="github-icon"
+          >
+            <GithubOutlined style={{ fontSize: 28, color: "#ffffff" }} />
+          </Link>
+        </Space>
+      </div>
 
       <div className="footer-copy-center">
         <Text className="footer-copy" style={{ color: "#ffffff" }}>

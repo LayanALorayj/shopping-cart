@@ -1,9 +1,8 @@
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
-import { app } from "./firebase"; // إذا عندك ملف firebase.js أو .ts فيه app
+import { app } from "./firebase"; 
 
 const db = getFirestore(app);
 
-// دالة لإضافة مستخدم جديد
 export const addUserToFirestore = async (userId: string, userData: any) => {
   try {
     await setDoc(doc(db, "users", userId), userData);

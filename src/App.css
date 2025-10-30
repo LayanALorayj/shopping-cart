@@ -1000,6 +1000,27 @@ h1 {
     align-items: center !important;
   }
 }
+.footer-info-group {
+  margin-top: 10px;
+}
+
+.footer-info-space {
+  justify-content: center;
+  gap: 75px !important; 
+}
+
+@media (max-width: 992px) {
+  .footer-info-space {
+    gap: 40px !important; 
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-info-space {
+    gap: 20px !important; 
+    flex-direction: column !important; 
+  }
+}
 
 .lang-btn:hover {
   background-color: #b08399;
