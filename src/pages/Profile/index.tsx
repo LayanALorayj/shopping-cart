@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "../../hooks/useAuthStore";
 import styles from "./index.module.css";
+import { auth } from "../../Config/firebase"; 
 
 const { Title, Text } = Typography;
 
@@ -64,10 +65,16 @@ const ProfilePage: React.FC = () => {
             type="primary"
             danger
             size="large"
-            onClick={() => {
-              logout();
-              message.info(t("profile.loggedOut"));
-              navigate("/login");
+            onClick={async () => {
+              try {
+                await auth.signOut(); 
+                logout(); 
+                message.info(t("profile.loggedOut"));
+                navigate("/login");
+              } catch (error) {
+                console.error("Error logging out:", error);
+                message.error("Error logging out!");
+              }
             }}
           >
             {t("profile.logout")}

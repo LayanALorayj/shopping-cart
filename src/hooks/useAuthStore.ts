@@ -11,6 +11,7 @@ interface User {
   image: string;
   displayName: string;
   photoURL: string;
+  role?: string;
 }
 
 interface AuthStore {

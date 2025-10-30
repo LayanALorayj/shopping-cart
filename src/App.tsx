@@ -16,6 +16,8 @@ const RegisterPage = lazy(() => import("./pages/Register"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const ProfilePage = lazy(() => import("./pages/Profile"));
 const SearchPage = lazy(() => import("./pages/SearchPage"));
+const AddProductPage = lazy(() => import("./pages/AddProduct"));
+
 
 const App: React.FC = () => {
   
@@ -55,6 +57,7 @@ const App: React.FC = () => {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/search" element={<SearchPage />} />
+              <Route path="/add-product" element={<AddProductPage />} />
             </Routes>
           </Suspense>
         </div>
