@@ -12,9 +12,12 @@ const ProductsPage = lazy(() => import("./pages/ProductsPage"));
 const ProductDetailPage = lazy(() => import("./pages/ProductDetailPage"));
 const CartPage = lazy(() => import("./pages/CartPage"));
 const ContactUs = lazy(() => import("./pages/ContactPage"));
+const RegisterPage = lazy(() => import("./pages/Register"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const ProfilePage = lazy(() => import("./pages/Profile"));
 const SearchPage = lazy(() => import("./pages/SearchPage"));
+const AddProductPage = lazy(() => import("./pages/AddProduct"));
+
 
 const App: React.FC = () => {
   
@@ -23,18 +26,20 @@ const App: React.FC = () => {
   }, [i18n.language]);
 
   return (
-    <ErrorBoundary>
-      <ConfigProvider
-        theme={{
-          token: {
-            colorPrimary: THEME_CONFIG.primaryColor,
-            borderRadius: THEME_CONFIG.borderRadius,
-            fontFamily: THEME_CONFIG.fontFamily,
-          },
-        }}
-      >
-        <Router>
-          <Header />
+      <ErrorBoundary>
+  <ConfigProvider
+    theme={{
+      token: {
+        colorPrimary: THEME_CONFIG.primaryColor,
+        borderRadius: THEME_CONFIG.borderRadius,
+        fontFamily: THEME_CONFIG.fontFamily,
+      },
+    }}
+  >
+    <Router>
+      <div className="app-container">
+        <Header />
+        <div className="app-content">
           <Suspense
             fallback={
               <div style={{ textAlign: "center", marginTop: "100px", fontSize: "18px" }}>
@@ -48,15 +53,19 @@ const App: React.FC = () => {
               <Route path="/product/:id" element={<ProductDetailPage />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/contact" element={<ContactUs />} />
+              <Route path="/register" element={<RegisterPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/search" element={<SearchPage />} />
+              <Route path="/add-product" element={<AddProductPage />} />
             </Routes>
           </Suspense>
-           <AppFooter />
-        </Router>
-      </ConfigProvider>
-    </ErrorBoundary>
+        </div>
+        <AppFooter />
+      </div>
+    </Router>
+  </ConfigProvider>
+</ErrorBoundary>
   );
 };
 

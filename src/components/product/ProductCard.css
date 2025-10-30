@@ -14,7 +14,7 @@
 /* Product Image Container */
 .product-image-container {
   position: relative;
-  height: 240px;
+  height: 100%;
   overflow: hidden;
   cursor: pointer;
 }
@@ -85,17 +85,7 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-  .product-image-container {
-    height: 200px;
-  }
-}
-
 @media (max-width: 480px) {
-  .product-image-container {
-    height: 160px;
-  }
-  
   .hover-actions {
     gap: 6px;
   }

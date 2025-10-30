@@ -11,7 +11,7 @@ import {
 import useAuthStore from "../../hooks/useAuthStore";
 import useCartStore from "../../hooks/useCartStore";
 import logo from "../../assets/logoL.png";
-import LanguageToggle from "../LanguageToggle";
+// import LanguageToggle from "../LanguageToggle";
 import { useTranslation } from "react-i18next";
 import HeaderSearch from "./HeaderSearch";
 
@@ -41,7 +41,7 @@ const Header: React.FC = () => {
       </nav>
 
       <div className="header-right">
-        <LanguageToggle />
+        {/* <LanguageToggle /> */}
         <Link to="/cart" className="cart-link cart-desktop">
           <Badge
             count={count}
