@@ -60,7 +60,6 @@ const ProfilePage: React.FC = () => {
           </div>
         </div>
 
-        {/* أزرار My Orders و Logout */}
         <div style={{ textAlign: "center", marginTop: "32px" }}>
           <Space direction="vertical" size="middle">
             <Button

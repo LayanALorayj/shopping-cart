@@ -32,7 +32,7 @@ export const useCheckout = () => {
       };
 
       await addDoc(collection(db, "orders"), orderData);
-      clearCart(); // حذف السلة بعد نجاح العملية
+      clearCart(); 
       return true;
     } catch (error) {
       console.error("Error submitting order:", error);

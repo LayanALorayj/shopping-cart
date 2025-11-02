@@ -847,7 +847,7 @@ h1 {
   justify-content: center;
   align-items: center;
   position: relative;
-  flex-wrap: wrap; /* يخليها تنزل تحت لما تصغر الشاشة */
+  flex-wrap: wrap; 
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 15px;
   margin-top: 40px;
@@ -857,7 +857,7 @@ h1 {
 .github-icon {
   color: #ffffff;
   transition: transform 0.3s ease, color 0.3s ease;
-  font-size: 22px; /* تصغير بسيط */
+  font-size: 22px; 
   margin-left: 12px;
 }
 
@@ -991,7 +991,7 @@ h1 {
   text-decoration: underline;
 }
 
-/* ✅ Orders Page Styles */
+/*  Orders Page Styles */
 .orders-container {
   max-width: 900px;
   margin: 50px auto;
