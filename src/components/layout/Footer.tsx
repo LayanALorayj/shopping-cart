@@ -1,6 +1,5 @@
 import { Layout, Typography, Space } from "antd";
 import {
-  PhoneOutlined,
   MailOutlined,
   EnvironmentOutlined,
   GithubOutlined,
@@ -37,18 +36,8 @@ const AppFooter = () => {
           wrap
           align="center"
           className="footer-info-space"
+          style={{ justifyContent: "center", marginTop: "8px" }}
         >
-          <Space>
-            <PhoneOutlined style={{ color: "#ffffff" }} />
-            <Link
-              href="tel:+966533530734"
-              className="footer-link"
-              style={{ color: "#ffffff" }}
-            >
-              +966 5x xxx xxxx
-            </Link>
-          </Space>
-
           <Space>
             <MailOutlined style={{ color: "#ffffff" }} />
             <Link
@@ -67,19 +56,21 @@ const AppFooter = () => {
               {t("footer.location")}
             </Text>
           </Space>
-
-          <Link
-            href="https://github.com/LayanALorayj/shopping-cart"
-            target="_blank"
-            aria-label="GitHub"
-            className="github-icon"
-          >
-            <GithubOutlined style={{ fontSize: 28, color: "#ffffff" }} />
-          </Link>
         </Space>
       </div>
 
-      <div className="footer-copy-center">
+      <div
+        className="footer-copy-center"
+      >
+        <Link
+          href="https://github.com/LayanALorayj/shopping-cart"
+          target="_blank"
+          aria-label="GitHub"
+          className="github-icon"
+        >
+          <GithubOutlined style={{ fontSize: 26, color: "#ffffff" }} />
+        </Link>
+
         <Text className="footer-copy" style={{ color: "#ffffff" }}>
           © {new Date().getFullYear()} {t("footer.siteName")}.{" "}
           {t("footer.rightsReserved")}

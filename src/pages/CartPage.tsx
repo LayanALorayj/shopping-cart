@@ -1,23 +1,64 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DeleteOutlined, HeartTwoTone } from "@ant-design/icons";
+import { message } from "antd";
 import useCartStore from "../hooks/useCartStore";
+import { useCheckout } from "../hooks/useCheckout";
 import { useTranslation } from "react-i18next";
+import { auth } from "../Config/firebase";
 import styles from "./CartPage.module.css";
 
 const CartPage: React.FC = () => {
   const { cartList, removeItem, loadCartFromStorage } = useCartStore();
+  const { checkout } = useCheckout();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  const [isOrderTabVisible, setIsOrderTabVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
     loadCartFromStorage();
+
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setIsLoggedIn(!!user);
+    });
+
+    return () => unsubscribe();
   }, [loadCartFromStorage]);
 
   const totalPrice = cartList.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
     0
   );
+
+  const handleCheckout = async () => {
+    if (cartList.length === 0) return message.warning("Your cart is empty!");
+
+    setLoading(true);
+
+    try {
+      const user = auth.currentUser;
+
+      if (!user) {
+        setIsOrderTabVisible(true);
+        message.info("Please log in to complete your order.");
+        return;
+      }
+
+      const success = await checkout(user.uid);
+
+      if (success) {
+        message.success("Order submitted successfully!");
+        setIsOrderTabVisible(true);
+      } else {
+        message.error("Failed to submit order.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -35,14 +76,13 @@ const CartPage: React.FC = () => {
                 <img src={item.product.thumbnail} alt={item.product.title} />
                 <h3>{item.product.title}</h3>
                 <p>
-                  ${item.product.price} x {item.quantity}
+                  ${item.product.price} × {item.quantity}
                 </p>
                 <button
                   onClick={() => removeItem(item.id)}
                   className={styles.removeButton}
                 >
-                  <DeleteOutlined />
-                  {t("cartPage.remove")}
+                  <DeleteOutlined /> {t("cartPage.remove")}
                 </button>
               </div>
             ))}
@@ -66,12 +106,44 @@ const CartPage: React.FC = () => {
         </>
       )}
 
-      <button
-        onClick={() => navigate("/")}
-        className={styles.continueButton}
-      >
-        {t("cartPage.continueShopping")}
-      </button>
+      <div className={styles.buttonGroup}>
+        <button onClick={() => navigate("/")} className={styles.continueButton}>
+          Continue Shopping
+        </button>
+
+        {cartList.length > 0 && (
+          <button
+            onClick={handleCheckout}
+            className={styles.checkoutButton}
+            disabled={loading}
+          >
+            {loading ? "Processing..." : "Checkout"}
+          </button>
+        )}
+      </div>
+
+      {isOrderTabVisible && (
+        <div className={styles.orderTab}>
+          {isLoggedIn ? (
+            <>
+              <h3>Order Submitted Successfully 🎉</h3>
+              <p>Your order has been placed and saved to Firestore.</p>
+              <div className={styles.orderTabButtons}>
+                <button onClick={() => setIsOrderTabVisible(false)}>Close</button>
+                <button onClick={() => navigate("/orders")}>See Orders</button>
+              </div>
+            </>
+          ) : (
+            <>
+              <h3>To complete your order, please log in.</h3>
+              <div className={styles.orderTabButtons}>
+                <button onClick={() => setIsOrderTabVisible(false)}>Close</button>
+                <button onClick={() => navigate("/login")}>Log In</button>
+              </div>
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 };

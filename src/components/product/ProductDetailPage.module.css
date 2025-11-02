@@ -45,9 +45,11 @@
 .mainImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; 
+  background-color: #f8f9fa; 
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 
 .mainImage:hover {
   transform: scale(1.05);
@@ -201,7 +203,7 @@
   border-radius: 12px;
   font-weight: 700;
   font-size: 16px;
-  background: linear-gradient(135deg,#bc6789, #f1d7ec);
+  background: #bc6789;
   border: none;
   box-shadow: 0 4px 16px rgba(254, 122, 182, 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

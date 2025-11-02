@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Rate } from "antd";
-import { useNavigate } from "react-router-dom";
 import { useCartStore } from "../../hooks";
 import styles from "./ProductDetailPage.module.css";
 import { useTranslation } from "react-i18next";
@@ -12,11 +11,10 @@ interface ProductHeaderProps {
 const ProductHeader: React.FC<ProductHeaderProps> = ({ product }) => {
   const addItem = useCartStore((state: any) => state.addItem);
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const handleAddToCart = () => {
-    addItem({ id: product.id, product: product, quantity: 1 });
-    navigate('/cart');
-  };
+  addItem(product);
+};
+
 
   return (
     <div className={styles.header}>
@@ -30,19 +28,36 @@ const ProductHeader: React.FC<ProductHeaderProps> = ({ product }) => {
       </div>
 
       <div className={styles.priceSection}>
-        <div className={styles.price}>${product.price}</div>
-        {product.originalPrice && product.originalPrice > product.price && (
-          <div className={styles.originalPrice}>${product.originalPrice}</div>
-        )}
-        {product.discount && (
-          <div className={styles.discountBadge}>
-            {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
-          </div>
-        )}
-        <div className={`${styles.stockStatus} ${product.stock > 0 ? styles.stockStatusInStock : styles.stockStatusOutOfStock}`}>
-          {product.stock > 0 ? t('product.inStock', { count: product.stock }) : t('product.outOfStock')}
-        </div>
+  {product.discountPercentage ? (
+    <>
+      <div className={styles.price}>
+        ${(
+          product.price -
+          product.price * (product.discountPercentage / 100)
+        ).toFixed(2)}
       </div>
+      <div className={styles.originalPrice}>${product.price}</div>
+      <div className={styles.discountBadge}>
+        {Math.round(product.discountPercentage)}% OFF
+      </div>
+    </>
+  ) : (
+    <div className={styles.price}>${product.price}</div>
+  )}
+
+  <div
+    className={`${styles.stockStatus} ${
+      product.stock > 0
+        ? styles.stockStatusInStock
+        : styles.stockStatusOutOfStock
+    }`}
+  >
+    {product.stock > 0
+      ? t("product.inStock", { count: product.stock })
+      : t("product.outOfStock")}
+  </div>
+</div>
+
 
       <div className={styles.actions}>
         <Button

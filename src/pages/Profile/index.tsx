@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { Card, Avatar, Typography, Button, message } from "antd";
-import { UserOutlined, MailOutlined } from "@ant-design/icons";
+import { Card, Avatar, Typography, Button, message, Space } from "antd";
+import { UserOutlined, MailOutlined, ShoppingOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "../../hooks/useAuthStore";
 import styles from "./index.module.css";
-import { auth } from "../../Config/firebase"; 
+import { auth } from "../../Config/firebase";
 
 const { Title, Text } = Typography;
 
@@ -60,25 +60,38 @@ const ProfilePage: React.FC = () => {
           </div>
         </div>
 
+        {/* أزرار My Orders و Logout */}
         <div style={{ textAlign: "center", marginTop: "32px" }}>
-          <Button
-            type="primary"
-            danger
-            size="large"
-            onClick={async () => {
-              try {
-                await auth.signOut(); 
-                logout(); 
-                message.info(t("profile.loggedOut"));
-                navigate("/login");
-              } catch (error) {
-                console.error("Error logging out:", error);
-                message.error("Error logging out!");
-              }
-            }}
-          >
-            {t("profile.logout")}
-          </Button>
+          <Space direction="vertical" size="middle">
+            <Button
+              type="default"
+              icon={<ShoppingOutlined />}
+              size="large"
+              onClick={() => navigate("/orders")}
+              className={styles.ordersButton}
+            >
+              My Orders
+            </Button>
+
+            <Button
+              type="primary"
+              danger
+              size="large"
+              onClick={async () => {
+                try {
+                  await auth.signOut();
+                  logout();
+                  message.info(t("profile.loggedOut"));
+                  navigate("/login");
+                } catch (error) {
+                  console.error("Error logging out:", error);
+                  message.error("Error logging out!");
+                }
+              }}
+            >
+              {t("profile.logout")}
+            </Button>
+          </Space>
         </div>
       </Card>
     </div>

@@ -105,6 +105,19 @@
   align-items: center;
   height: 100vh;
 }
+.ordersButton {
+  background-color: #bc6789 !important;
+  color: #fff !important;
+  border: none !important;
+  width: 200px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.ordersButton:hover {
+  background-color: #a45777 !important;
+  color: #fff !important;
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
