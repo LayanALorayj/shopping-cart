@@ -127,7 +127,7 @@ const CartPage: React.FC = () => {
           {isLoggedIn ? (
             <>
               <h3>Order Submitted Successfully 🎉</h3>
-              <p>Your order has been placed and saved to Firestore.</p>
+              <p>Your order has been placed and saved </p>
               <div className={styles.orderTabButtons}>
                 <button onClick={() => setIsOrderTabVisible(false)}>Close</button>
                 <button onClick={() => navigate("/orders")}>See Orders</button>
@@ -135,7 +135,7 @@ const CartPage: React.FC = () => {
             </>
           ) : (
             <>
-              <h3>To complete your order, please log in.</h3>
+              <h3>To complete your order, please log in</h3>
               <div className={styles.orderTabButtons}>
                 <button onClick={() => setIsOrderTabVisible(false)}>Close</button>
                 <button onClick={() => navigate("/login")}>Log In</button>
