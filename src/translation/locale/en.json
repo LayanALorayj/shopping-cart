@@ -1,0 +1,145 @@
+{
+  "categories": {
+    "beauty": "Beauty",
+    "womens-dresses": "Women's Dresses",
+    "womens-shoes": "Women's Shoes",
+    "womens-watches": "Women's Watches",
+    "womens-bags": "Women's Bags",
+    "womens-jewellery": "Women's Jewellery"
+  },
+  "homepage": {
+    "title": "Categories",
+    "loading": "Loading...",
+    "error": "Error: {{error}}"
+  },
+  "cartPage": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty !",
+    "remove": "Remove",
+    "orderSummary": "Order Summary",
+    "items": "Items",
+    "total": "Total",
+    "continueShopping": "Continue Shopping"
+  },
+  
+  "header": {
+    "search": "search",
+    "contact": "Contact Us",
+    "cart": "Cart",
+    "profile": "Profile",
+    "login": "Login",
+    "searchPlaceholder": "Search...",
+    "viewAllResults": "View all results"
+  },
+  
+  "contact": {
+    "contactUs": "Contact Us",
+    "name": "Name",
+    "email": "Email",
+    "comment": "Comment",
+    "enterName": "Enter your name",
+    "enterEmail": "Enter your email",
+    "enterComment": "Enter your comment",
+    "submit": "Submit"
+  },
+  "products": {
+    "loading": "Loading...",
+    "noProducts": "No products found in this category.",
+    "addToCart": "Add to Cart",
+    "outOfStock": "Out of Stock",
+    "inStock": "In Stock"
+  },
+  "search": {
+    "searchProducts": "Product Search",
+    "placeholder": "Search for products...",
+    "noResults": "No matching results"
+  },
+  "login": {
+    "welcome": "Welcome",
+    "email": "Email",
+    "password": "Password",
+    "enterEmail": "Enter your Email",
+    "enterPassword": "Enter your Email",
+    "remember": "Remember me",
+    "forgot": "Forgot password?",
+    "login": "Login",
+    "success": "Logged in successfully!",
+    "invalid": "Invalid Email or password",
+    "loginWithGoogle": "login With Google",
+    "noAccount": "Don’t have an account?",
+    "createAccount": "Create one",
+    "invalidEmail": "Invalid email",
+    "userNotFound": "User not found",
+    "wrongPassword": "Incorrect password",
+    "tooManyRequests": "Too many attempts, please try later",
+    "firebaseError": "An error occurred while logging in. Please try again.",
+    "googleError": "Google login failed"
+  },
+  "profile": {
+    "loginFirst": "Please log in first",
+    "unknown": "Unknown",
+    "noEmail": "No email",
+    "gender": "Gender",
+    "logout": "Logout",
+    "loggedOut": "Logged out successfully"
+  },
+  "common": {
+    "ratingTotal": "5"
+  },
+  "product": {
+    "brand": "Brand",
+    "off": "OFF",
+    "inStock": "In Stock ({{count}} available)",
+    "outOfStock": "Out of Stock",
+    "addToCart": "Add to Cart",
+    "loading": "Loading product..."
+  },
+  "tabs": {
+    "overview": "Overview",
+    "details": "Details",
+    "reviews": "Reviews"
+  },
+  "details": {
+    "size": "Size",
+    "weight": "Weight",
+    "weightUnit": "kg",
+    "sku": "SKU"
+  },
+  "reviews": {
+    "noReviews": "No reviews yet."
+  },
+  "footer": {
+    "siteName": "My Website",
+    "contactUs": "Contact Us",
+    "location": "Riyadh, Saudi Arabia",
+    "aboutUs": "About Us",
+    "privacyPolicy": "Privacy Policy",
+    "termsConditions": "Terms & Conditions",
+    "rightsReserved": "All rights reserved."
+  },
+  "register": {
+    "title": "Create a New Account",
+    "subtitle": "Join us and start shopping",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "submit": "Register",
+    "login": "Login",
+    "haveAccount": "Already have an account?",
+    "usernameError": "Please enter your username",
+    "emailError": "Please enter your email",
+    "emailInvalid": "Please enter a valid email address",
+    "passwordError": "Please enter your password",
+    "confirmError": "Please confirm your password",
+    "passwordMismatch": "Passwords do not match",
+    "google": "Register With Google"
+  }
+}
+
+
+
+
+
+
+

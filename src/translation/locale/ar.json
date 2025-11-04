@@ -1,0 +1,150 @@
+{
+  "categories": {
+    "beauty": "الجمال",
+    "womens-dresses": "فساتين نسائية",
+    "womens-shoes": "أحذية نسائية",
+    "womens-watches": "ساعات نسائية",
+    "womens-bags": "حقائب نسائية",
+    "womens-jewellery": "مجوهرات نسائية"
+  },
+  "homepage": {
+    "title": "التصنيفات",
+    "loading": "جارٍ التحميل...",
+    "error": "حدث خطأ: {{error}}"
+  },
+  "cartPage": {
+    "title": "سلة التسوق",
+    "empty": "سلتك فارغة !",
+    "remove": "حذف",
+    "orderSummary": "ملخص الطلب",
+    "items": "المنتجات",
+    "total": "الإجمالي",
+    "continueShopping": "متابعة التسوق"
+  },
+  "header": {
+    "search": "البحث",
+    "contact": "اتصل بنا",
+    "cart": "السلة",
+    "profile": "الملف الشخصي",
+    "login": "تسجيل الدخول",
+    "searchPlaceholder": "ابحث...",
+    "viewAllResults": "عرض كل النتائج"
+  },
+  
+  "contact": {
+    "contactUs": "اتصل بنا",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "comment": "التعليق",
+    "enterName": "أدخل اسمك",
+    "enterEmail": "أدخل بريدك الإلكتروني",
+    "enterComment": "أدخل تعليقك",
+    "submit": "إرسال"
+  },
+  "product": {
+    "loading": "جارٍ تحميل المنتج...",
+     "brand": "العلامة التجارية",
+    "off": "خصم",
+    "inStock": "متوفر ({{count}} متاح)",
+    "outOfStock": "غير متوفر",
+    "addToCart": "إضافة للسلة"
+  },
+  "products": {
+    "allProducts": "جميع المنتجات",
+    "loading": "جارٍ التحميل...",
+    "noProducts": "لا توجد منتجات في هذه الفئة.",
+    "addToCart": "أضف إلى السلة",
+    "outOfStock": "نفذت الكمية",
+    "inStock": "متوفر"
+  },
+  "search": {
+    "searchProducts": "بحث المنتجات",
+    "placeholder": "ابحث عن المنتجات...",
+    "noResults": "لا توجد نتائج مطابقة"
+  },
+  "login": {
+    "welcome": "مرحبا",
+    "email": " الايميل",
+    "password": "كلمة المرور",
+    "enterEmail": "أدخل البريد الاكتروني",
+    "enterPassword": "أدخل كلمة المرور",
+    "remember": "تذكرني",
+    "forgot": "نسيت كلمة المرور؟",
+    "login": "تسجيل الدخول",
+    "success": "تم تسجيل الدخول بنجاح!",
+    "invalid": "البريد الاكتروني أو كلمة المرور غير صحيحة",
+    "loginWithGoogle": "تسجيل الدخول بواسطة قوقل",
+    "noAccount": "ليس لديك حساب؟",
+    "createAccount": "أنشئ حسابًا",
+    "invalidEmail": "البريد الإلكتروني غير صالح",
+    "userNotFound": "المستخدم غير موجود",
+    "wrongPassword": "كلمة المرور غير صحيحة",
+    "tooManyRequests": "تم حظر المحاولات مؤقتًا. حاول لاحقًا",
+    "firebaseError": "حدث خطأ أثناء تسجيل الدخول. حاول مرة أخرى",
+    "googleError": "فشل تسجيل الدخول عبر Google"
+  },
+  "profile": {
+    "loginFirst": "يرجى تسجيل الدخول أولا",
+    "unknown": "غير معروف",
+    "noEmail": "لا يوجد بريد إلكتروني",
+    "gender": "الجنس",
+    "logout": "تسجيل الخروج",
+    "loggedOut": "تم تسجيل الخروج بنجاح"
+  },
+  
+  "common": {
+    "ratingTotal": "من 5"
+  },
+  "tabs": {
+    "overview": "نظرة عامة",
+    "details": "التفاصيل",
+    "reviews": "المراجعات"
+  },
+  "details": {
+    "size": "الأبعاد",
+    "weight": "الوزن",
+    "weightUnit": "كجم",
+    "sku": "رمز المنتج"
+  },
+  "reviews": {
+    "noReviews": "لا توجد مراجعات بعد."
+  },
+  "footer": {
+    "siteName": "موقعي",
+    "description": "وصف قصير عن الموقع — يمكنك كتابة شعار الموقع أو الغرض منه هنا.",
+    "contactUs": "تواصل معنا",
+    "location": "الرياض، المملكة العربية السعودية",
+    "aboutUs": "عنّا",
+    "privacyPolicy": "سياسة الخصوصية",
+    "termsConditions": "الشروط والأحكام",
+    "rightsReserved": "كل الحقوق محفوظة."
+  },
+  "register": {
+    "title": "إنشاء حساب جديد",
+    "subtitle": "انضم إلينا وابدأ التسوق",
+    "username": "اسم المستخدم",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "submit": "تسجيل",
+    "login": "تسجيل الدخول",
+    "haveAccount": "هل لديك حساب بالفعل؟",
+    "usernameError": "الرجاء إدخال اسم المستخدم",
+    "emailError": "الرجاء إدخال البريد الإلكتروني",
+    "emailInvalid": "يرجى إدخال بريد إلكتروني صالح",
+    "passwordError": "الرجاء إدخال كلمة المرور",
+    "confirmError": "الرجاء تأكيد كلمة المرور",
+    "passwordMismatch": "كلمتا المرور غير متطابقتان",
+    "google": " انشاء حساب بستخدام جوجل"
+  }
+}
+
+
+
+
+
+
+
+
+
+

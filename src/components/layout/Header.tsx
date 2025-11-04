@@ -1,65 +1,98 @@
-import React from "react";
-import { Layout } from 'antd'; 
+import React, { useState } from "react";
+import { Layout, Badge, Button } from "antd";
 import { Link } from "react-router-dom";
-import { ShoppingOutlined, ShoppingCartOutlined } from "@ant-design/icons"; 
-import { useCart } from "../../context/CartContext";
+import {
+  ShoppingCartOutlined,
+  SearchOutlined,
+  PhoneFilled,
+  MenuOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import useAuthStore from "../../hooks/useAuthStore";
+import useCartStore from "../../hooks/useCartStore";
+import logo from "../../assets/logoL.png";
+// import LanguageToggle from "../LanguageToggle";
+import { useTranslation } from "react-i18next";
+import HeaderSearch from "./HeaderSearch";
 
-const { Header: AntHeader } = Layout; 
 
-const customAntHeaderStyle: React.CSSProperties = {
-  background: 'linear-gradient(90deg, #cda0b2, #bc6789)', 
-  color: 'white',
-  height: 64, 
-  padding: '1rem 2.5rem',
-  display: 'flex',
-  justifyContent: 'space-between', 
-  alignItems: 'center',
-  lineHeight: 'normal', 
-  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.15)',
-  position: 'sticky',
-  top: 0,
-  zIndex: 10,
-};
-
-const shopTitleStyles: React.CSSProperties = {
-  fontSize: '1.6rem',
-  letterSpacing: '1px',
-  fontWeight: 600,
-  margin: 0, 
-  display: 'flex',
-  alignItems: 'center',
-};
-
-const cartIconContainerStyles: React.CSSProperties = {
-  fontSize: '1.2rem',
-  background: 'rgba(255, 255, 255, 0.2)', 
-  padding: '6px 14px',
-  borderRadius: '20px',
-  fontWeight: 500,
-  display: 'flex',
-  alignItems: 'center',
-  gap: '5px',
-  color: 'white',
-  cursor: 'pointer', 
-  textDecoration: 'none' 
-};
+const { Header: AntHeader } = Layout;
 
 const Header: React.FC = () => {
-  const { state } = useCart();
+  const { t } = useTranslation();
+  const cartList = useCartStore((state) => state.cartList);
+  const count = cartList.reduce((total, item) => total + item.quantity, 0);
+  const { accessToken } = useAuthStore();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
-    <AntHeader style={customAntHeaderStyle}>
-      <h2 style={shopTitleStyles}>
-        <ShoppingOutlined style={{ marginRight: "8px" }} />
-        Shop
-      </h2>
+    <AntHeader className="custom-header">
+      <div className="header-left">
+        <Link to="/" className="logo-link">
+          <img src={logo} alt="Shop Logo" className="logo-image" />
+          <span className="shop-name">Layan Shop</span>
+        </Link>
+      </div>
 
-      <Link to="/cart" style={{ textDecoration: "none" }}>
-        <div style={cartIconContainerStyles}>
-          <ShoppingCartOutlined />
-          <span>{state.count}</span>
+      <nav className="nav-center nav-desktop">
+        <HeaderSearch />
+      </nav>
+
+      <div className="header-right">
+        {/* <LanguageToggle /> */}
+        <Link to="/cart" className="cart-link cart-desktop">
+          <Badge
+            count={count}
+            size="default"
+            style={{
+              backgroundColor: "#ff69b4",
+              boxShadow: "0 0 6px rgba(255, 105, 180, 0.6)",
+              fontSize: "13px",
+              minWidth: "22px",
+              height: "22px",
+              lineHeight: "22px",
+            }}
+          >
+            <div className="cart-icon-container">
+              <ShoppingCartOutlined />
+            </div>
+          </Badge>
+        </Link>
+
+        <Link to={accessToken ? "/profile" : "/login"} className="profile-link">
+          <UserOutlined className="profile-icon" />
+        </Link>
+
+        <Button
+          type="text"
+          icon={<MenuOutlined />}
+          onClick={toggleMenu}
+          className="menu-button"
+        />
+      </div>
+
+      {menuOpen && (
+        <div className="dropdown-menu">
+          <Link  to="/search" className="dropdown-item" onClick={() => setMenuOpen(false)}>
+             <SearchOutlined className="nav-icon" /> {t("header.search") || "Search"}
+          </Link>
+          <Link to="/contact" className="dropdown-item" onClick={() => setMenuOpen(false)}>
+            <PhoneFilled className="nav-icon" /> {t("header.contact")}
+          </Link>
+          <Link to="/cart" className="dropdown-item" onClick={() => setMenuOpen(false)}>
+            <ShoppingCartOutlined className="nav-icon" /> {t("header.cart")} ({count})
+          </Link>
+          <Link
+            to={accessToken ? "/profile" : "/login"}
+            className="dropdown-item"
+            onClick={() => setMenuOpen(false)}
+          >
+            <UserOutlined className="nav-icon" /> {t(accessToken ? "header.profile" : "header.login")}
+          </Link>
         </div>
-      </Link>
+      )}
     </AntHeader>
   );
 };
