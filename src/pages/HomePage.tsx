@@ -6,15 +6,29 @@ import { logEvent } from "firebase/analytics";
 import { analytics, getUserFromFirestore, auth } from "../Config/firebase";
 import "../App.css";
 import { Button } from "antd";
-import useAuthStore from "../hooks/useAuthStore"; 
+import useAuthStore from "../hooks/useAuthStore";
 
 const HomePage: React.FC = () => {
   const { categories, loading, error } = useProducts();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { user: storeUser, isAuthenticated } = useAuthStore(); 
+  const { user: storeUser, isAuthenticated } = useAuthStore();
   const [isAdmin, setIsAdmin] = useState(false);
   const [authLoading, setAuthLoading] = useState(true);
+
+  const categoryImages: Record<string, string> = {
+    beauty:"https://cdn.britannica.com/35/222035-050-C68AD682/makeup-cosmetics.jpg",
+
+    "womens-bags":"https://s.alicdn.com/@sc04/kf/H5754f826ef344ce58dc855d7bf4a9aecF.jpg",
+
+    "womens-dresses":"https://i.pinimg.com/736x/73/64/7a/73647a7fe10bcf088ca2982496b17fc5.jpg",
+
+    "womens-jewellery":"https://endlessandco.com.au/cdn/shop/articles/20230826_215053_1100x.jpg?v=1699921667",
+
+    "womens-shoes":"https://bravomoda.eu/5579/white-wedding-shoes-with-glittery-stiletto-heels.jpg",
+
+    "womens-watches":"https://sc04.alicdn.com/kf/Ha887eab344304fd9a99572a9dab1166ec.jpg",
+  };
 
   useEffect(() => {
     if (analytics) {
@@ -22,15 +36,10 @@ const HomePage: React.FC = () => {
     }
 
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      if (user && isAuthenticated) { 
+      if (user && isAuthenticated) {
         const userData = await getUserFromFirestore(user.uid);
-
-        const role = userData?.role || storeUser?.role; 
-        if (role === "admin") {
-          setIsAdmin(true);
-        } else {
-          setIsAdmin(false);
-        }
+        const role = userData?.role || storeUser?.role;
+        setIsAdmin(role === "admin");
       } else {
         setIsAdmin(false);
       }
@@ -38,7 +47,7 @@ const HomePage: React.FC = () => {
     });
 
     return () => unsubscribe();
-  }, [isAuthenticated, storeUser]); 
+  }, [isAuthenticated, storeUser]);
 
   const handleCategoryClick = (slug: string) => {
     if (analytics) {
@@ -51,7 +60,8 @@ const HomePage: React.FC = () => {
     navigate("/add-product");
   };
 
-  if (authLoading) return <div className="hp-loading">Loading authentication...</div>;
+  if (authLoading)
+    return <div className="hp-loading">Loading authentication...</div>;
   if (loading) return <div className="hp-loading">Loading categories...</div>;
   if (error) return <div className="hp-error">Error: {error}</div>;
 
@@ -79,7 +89,18 @@ const HomePage: React.FC = () => {
               if (e.key === "Enter") handleCategoryClick(cat.slug);
             }}
           >
-            <h3 className="category-name">{t(`categories.${cat.slug}`)}</h3>
+            <div
+              className="category-bg"
+              style={{
+                backgroundImage: `url(${
+                  categoryImages[cat.slug] || "https://via.placeholder.com/400"
+                })`,
+              }}
+            ></div>
+
+            <div className="category-content">
+              <h3 className="category-name">{t(`categories.${cat.slug}`)}</h3>
+            </div>
           </div>
         ))}
 
@@ -89,7 +110,17 @@ const HomePage: React.FC = () => {
           role="button"
           tabIndex={0}
         >
-          <h3 className="category-name">New Product</h3>
+          <div
+            className="category-bg"
+            style={{
+              backgroundImage:
+                'url("https://www.publicdomainpictures.net/pictures/210000/nahled/new-label-overlay.jpg")',
+            }}
+          ></div>
+
+          <div className="category-content">
+            <h3 className="category-name">New Product</h3>
+          </div>
         </div>
       </div>
     </div>

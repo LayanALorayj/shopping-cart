@@ -313,33 +313,45 @@ h1 {
 
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr)); 
-  gap: 18px;
-  align-items: stretch;
-  overflow-x: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
 .category-card {
-  background: linear-gradient(180deg, #fff6fb 0%, #f7eef6 100%); 
-  border: 1.5px solid rgb(188 103 137 / 15%);
-  box-shadow: 0 6px 18px rgba(123, 70, 92, 0.06);
-  border-radius: 12px;
-  padding: 24px;
+  position: relative;
+  height: 180px;
+  border-radius: 15px;
+  overflow: hidden;
   cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  transition: transform 0.25s ease;
+}
+
+.category-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(3px) brightness(0.7);
+  opacity: 0.6;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+.category-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  user-select: none;
-  min-height: 120px;
 }
 
 .category-name {
-  margin: 0;
-  font-size: 1.05rem;
-  color: #6f2f45; 
-  font-weight: 600;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  text-align: center;
 }
 
 .category-card:hover,

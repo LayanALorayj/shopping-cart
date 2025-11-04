@@ -278,7 +278,7 @@
 }
 
 .tag {
-  background: linear-gradient(135deg,#bc6789, #f1d7ec);
+  background: #c97999fa;
   color: white;
   padding: 4px 10px;
   border-radius: 16px;

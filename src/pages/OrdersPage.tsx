@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { getFirestore, collection, getDocs, query, orderBy, where } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  where,
+} from "firebase/firestore";
 import { auth } from "../Config/firebase";
 import "../App.css";
 
@@ -47,6 +54,20 @@ const OrdersPage: React.FC = () => {
   if (orders.length === 0)
     return <div className="orders-empty">You have no orders yet.</div>;
 
+  const formatDate = (timestamp: any) => {
+    if (!timestamp?.toDate) return "Unknown";
+
+    const date = timestamp.toDate();
+    return date.toLocaleString("en-GB", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+  };
+
   return (
     <div className="orders-container">
       <h2 className="orders-title">Your Orders</h2>
@@ -56,23 +77,30 @@ const OrdersPage: React.FC = () => {
           <div className="orders-items">
             {order.items.map((item: any) => (
               <div key={item.id} className="orders-item">
-                <img src={item.thumbnail} alt={item.name} className="orders-item-image" />
+                <img
+                  src={item.thumbnail}
+                  alt={item.name}
+                  className="orders-item-image"
+                />
                 <div className="orders-item-info">
                   <h4>{item.name}</h4>
-                  <p>${item.price} × {item.quantity}</p>
+                  <p>
+                    ${item.price} × {item.quantity}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
 
           <div className="orders-summary">
-            <p><strong>Order ID:</strong> {order.id}</p>
-            <p><strong>Total:</strong> ${order.total?.toFixed(2)}</p>
             <p>
-              <strong>Date:</strong>{" "}
-              {order.createdAt?.toDate
-                ? order.createdAt.toDate().toLocaleString()
-                : "Unknown"}
+              <strong>Order ID:</strong> {order.id}
+            </p>
+            <p>
+              <strong>Total:</strong> ${order.total?.toFixed(2)}
+            </p>
+            <p>
+              <strong>Date:</strong> {formatDate(order.createdAt)}
             </p>
           </div>
         </div>
